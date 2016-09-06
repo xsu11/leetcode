@@ -1,8 +1,10 @@
 /*
- * ClimbingStairs.c
+ * ClimbingStairs1.c
  *
  *  Created on: Sep 06, 2016
  *      Author: xinsu
+ *
+ * Recursive Memoization
  */
 
 /*
@@ -12,21 +14,24 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 int countStairs(int *counts, int n) {
-	if (n <= 2) {
+	if (n < 0) {
+		return 0;
+	} else if (n <= 2) {
 		return n;
 	} else if (counts[n - 1] != 0) {
 		return counts[n - 1];
 	}
 
-	// memoized recursion
-	counts[n - 1] = countStairs(n - 1) + countStairs(n - 2);
+	counts[n - 1] = countStairs(counts, n - 1) + countStairs(counts, n - 2);
 	return counts[n - 1];
 }
 
 int climbStairs(int n) {
 	int *counts = (int *) calloc(n, sizeof(int));
-	return countStairs(counts, n);
+
+	int result = countStairs(counts, n);
+	free(counts);
+	return result;
 }
