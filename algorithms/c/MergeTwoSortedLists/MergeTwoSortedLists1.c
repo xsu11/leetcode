@@ -3,6 +3,8 @@
  *
  *  Created on: Sep 02, 2016
  *      Author: xinsu
+ *
+ * Assume the input Linked lists are both sorted in assendant order.
  */
 
 /*
@@ -16,8 +18,6 @@
  *     int val;
  *     struct ListNode *next;
  * };
- *
- * Assume the input Linked lists are both sorted in assendent order.
  */
 #include <stdio.h>
 #include <limits.h>
