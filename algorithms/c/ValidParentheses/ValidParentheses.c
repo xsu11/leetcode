@@ -21,7 +21,7 @@ struct Stack {
 	char *data;
 };
 
-char top(struct Stack *stack) {
+char peak(struct Stack *stack) {
 	if (stack->size <= 0) {
 		return NULL;
 	}
@@ -62,7 +62,7 @@ bool isValid(char* s) {
 		if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
 			push(stack, s[i]);
 		} else if (s[i] == ')' || s[i] == ']' || s[i] == '}') {
-			char t = top(stack);
+			char t = peak(stack);
 			if ((t == '(' && s[i] == ')') || (t == '[' && s[i] == ']')
 					|| (t == '{' && s[i] == '}')) {
 				pop(stack);
