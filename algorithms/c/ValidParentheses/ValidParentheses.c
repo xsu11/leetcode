@@ -17,12 +17,15 @@
 #include <stdbool.h>
 #include <string.h>
 
+/*** Stack structure definition ***/
 struct CharStack {
 	int size;
 	int length;
 	char *data;
 };
+/*** Stack structure definition end ***/
 
+/*** Stack opeations difinition ***/
 char peak(struct CharStack *stack) {
 	if (stack->size <= 0) {
 		return NULL;
@@ -50,6 +53,7 @@ char pop(struct CharStack *stack) {
 	char s = stack->data[stack->size-- - 1];
 	return s;
 }
+/*** Stack opeations difinition end ***/
 
 bool isValid(char* s) {
 	int length = strlen(s);
