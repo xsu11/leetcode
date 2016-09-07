@@ -6,22 +6,24 @@
  */
 
 /*
- Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+ Given a string containing just the characters '(', ')', '{', '}', '[' and ']',
+ determine if the input string is valid.
 
- The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
+ The brackets must close in the correct order,
+ "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
  */
 
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 
-struct Stack {
+struct CharStack {
 	int size;
 	int length;
 	char *data;
 };
 
-char peak(struct Stack *stack) {
+char peak(struct CharStack *stack) {
 	if (stack->size <= 0) {
 		return NULL;
 	}
@@ -29,7 +31,7 @@ char peak(struct Stack *stack) {
 	return stack->data[stack->size - 1];
 }
 
-bool push(struct Stack *stack, char s) {
+bool push(struct CharStack *stack, char s) {
 	if (stack->size >= stack->length) {
 		return false;
 	}
@@ -40,7 +42,7 @@ bool push(struct Stack *stack, char s) {
 	return true;
 }
 
-char pop(struct Stack *stack) {
+char pop(struct CharStack *stack) {
 	if (stack->size <= 0) {
 		return NULL;
 	}
@@ -53,7 +55,7 @@ bool isValid(char* s) {
 	int length = strlen(s);
 
 	// init stack
-	struct Stack *stack = (struct Stack *) calloc(1, sizeof(struct Stack));
+	struct CharStack *stack = (struct Stack *) calloc(1, sizeof(struct Stack));
 	stack->length = length;
 	stack->data = (char *) calloc(length, sizeof(char));
 
