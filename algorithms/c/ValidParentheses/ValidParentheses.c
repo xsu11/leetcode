@@ -18,7 +18,7 @@
 #include <string.h>
 
 /*** Stack structure definition ***/
-struct CharStack {
+struct StackChar {
 	int size;
 	int length;
 	char *data;
@@ -26,7 +26,25 @@ struct CharStack {
 /*** Stack structure definition end ***/
 
 /*** Stack opeations difinition ***/
-char peak(struct CharStack *stack) {
+struct StackChar *create(int length) {
+	if (length <= 0) {
+		return NULL;
+	}
+	struct StackChar *stack = (struct StackChar *) calloc(1,
+			sizeof(struct StackChar));
+	stack->length = length;
+	stack->data = (char *) calloc(length, sizeof(char));
+	return stack;
+}
+
+void destroy(struct StackChar *stack) {
+	if (stack != NULL && stack->data != NULL) {
+		free(stack->data);
+		free(stack);
+	}
+}
+
+char peak(struct StackChar *stack) {
 	if (stack->size <= 0) {
 		return NULL;
 	}
@@ -34,7 +52,7 @@ char peak(struct CharStack *stack) {
 	return stack->data[stack->size - 1];
 }
 
-bool push(struct CharStack *stack, char s) {
+bool push(struct StackChar *stack, char s) {
 	if (stack->size >= stack->length) {
 		return false;
 	}
@@ -45,7 +63,7 @@ bool push(struct CharStack *stack, char s) {
 	return true;
 }
 
-char pop(struct CharStack *stack) {
+char pop(struct StackChar *stack) {
 	if (stack->size <= 0) {
 		return NULL;
 	}
@@ -59,7 +77,7 @@ bool isValid(char* s) {
 	int length = strlen(s);
 
 	// init stack
-	struct CharStack *stack = (struct Stack *) calloc(1, sizeof(struct Stack));
+	struct StackChar *stack = create(length);
 	stack->length = length;
 	stack->data = (char *) calloc(length, sizeof(char));
 
@@ -84,5 +102,6 @@ bool isValid(char* s) {
 		return false;
 	}
 
+	destroy(stack);
 	return true;
 }
