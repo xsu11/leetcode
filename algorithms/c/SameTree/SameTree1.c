@@ -34,12 +34,14 @@ struct TreeNode {
 };
 
 bool isSameTree(struct TreeNode* p, struct TreeNode* q) {
+	// base case
 	if (p == NULL || q == NULL) {
 		return (bool) (p == q);
 	} else if (p->val != q->val) {
 		return false;
 	}
 
+	// recursion
 	return (bool) (isSameTree(p->left, q->left)
 			&& isSameTree(p->right, q->right));
 }
