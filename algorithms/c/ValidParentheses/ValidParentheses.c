@@ -38,14 +38,16 @@ struct StackChar *create(int length) {
 }
 
 void destroy(struct StackChar *stack) {
-	if (stack != NULL && stack->data != NULL) {
-		free(stack->data);
+	if (stack != NULL) {
+		if (stack->data != NULL) {
+			free(stack->data);
+		}
 		free(stack);
 	}
 }
 
 char peak(struct StackChar *stack) {
-	if (stack->size <= 0) {
+	if (stack == NULL || stack->size == 0) {
 		return NULL;
 	}
 
@@ -64,7 +66,7 @@ bool push(struct StackChar *stack, char s) {
 }
 
 char pop(struct StackChar *stack) {
-	if (stack->size <= 0) {
+	if (stack == NULL || stack->size == 0) {
 		return NULL;
 	}
 
