@@ -149,7 +149,7 @@ bool isSymmetric(struct TreeNode* root) {
 		struct TreeNode *rNode = pop(rStack, NULL);
 
 		if (lNode == NULL && rNode == NULL) {
-			;
+			continue;
 		} else if (lNode == NULL ^ rNode == NULL) {
 			result = false;
 		} else if (lNode->val != rNode->val) {
