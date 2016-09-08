@@ -1,5 +1,5 @@
 /*
- * SymmetricTree3.c
+ * SymmetricTree3_DFS_like_BFS.c
  *
  *  Created on: Sep 08, 2016
  *      Author: xinsu

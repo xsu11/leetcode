@@ -1,5 +1,5 @@
 /*
- * SymmetricTree2.c
+ * SymmetricTree2_DFS.c
  *
  *  Created on: Sep 07, 2016
  *      Author: xinsu
