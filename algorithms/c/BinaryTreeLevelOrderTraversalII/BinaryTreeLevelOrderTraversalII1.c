@@ -1,13 +1,15 @@
 /*
- * BinaryTreeLevelOrderTraversal.c
+ * BinaryTreeLevelOrderTraversalII1.c
  *
- *  Created on: Sep 08, 2016
+ *  Created on: Sep 09, 2016
  *      Author: xinsu
+ *
+ * BFS solution, using two queues.
  */
 
 /*
- Given a binary tree, return the level order traversal of its nodes' values.
- (ie, from left to right, level by level).
+ Given a binary tree, return the bottom-up level order traversal of its nodes' values.
+ (ie, from left to right, level by level from leaf to root).
 
  For example:
  Given binary tree [3,9,20,null,null,15,7],
@@ -16,11 +18,11 @@
   9  20
  /  \
    15   7
- return its level order traversal as:
+ return its bottom-up level order traversal as:
  [
- [3],
+ [15,7],
  [9,20],
- [15,7]
+ [3]
  ]
  */
 
@@ -136,7 +138,8 @@ struct TreeNode *dequeue(struct QueueTreeNode *queue, int *info) {
 }
 /*** Queue operations definition end ***/
 
-int **levelOrder(struct TreeNode *root, int **columnSizes, int *returnSize) {
+int **levelOrderBottom(struct TreeNode *root, int **columnSizes,
+		int *returnSize) {
 	if (root == NULL) {
 		*columnSizes = NULL;
 		returnSize = NULL;
@@ -167,7 +170,7 @@ int **levelOrder(struct TreeNode *root, int **columnSizes, int *returnSize) {
 	// Then traverse the queue2 and store the columnSizes
 	struct QueueNode *curQueueNode = additionalQueue->front;
 	while (curQueueNode != NULL) {
-		columnSizes[0][curQueueNode->info]++;
+		columnSizes[0][*returnSize - 1 - curQueueNode->info]++;
 		curQueueNode = curQueueNode->next;
 	}
 
@@ -182,10 +185,12 @@ int **levelOrder(struct TreeNode *root, int **columnSizes, int *returnSize) {
 
 	// Traverse queue2 again and set result
 	curQueueNode = additionalQueue->front;
+	int bottomUpLevel = 0;
 	while (curQueueNode != NULL) {
-		level = curQueueNode->info;
-		result[level][columnSizes[0][level]] = curQueueNode->data->val;
-		columnSizes[0][level]++;
+		bottomUpLevel = *returnSize - 1 - curQueueNode->info;
+		result[bottomUpLevel][columnSizes[0][bottomUpLevel]] =
+				curQueueNode->data->val;
+		columnSizes[0][bottomUpLevel]++;
 		curQueueNode = curQueueNode->next;
 	}
 
