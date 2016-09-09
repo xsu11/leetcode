@@ -21,6 +21,7 @@
  *     struct ListNode *next;
  * };
  */
+
 #include <stdio.h>
 
 struct ListNode* swapPairs(struct ListNode* head) {

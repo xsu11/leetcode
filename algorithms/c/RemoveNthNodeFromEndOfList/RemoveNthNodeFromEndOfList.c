@@ -25,6 +25,7 @@
  *     struct ListNode *next;
  * };
  */
+
 #include <stdio.h>
 
 struct ListNode* removeNthFromEnd(struct ListNode* head, int n) {

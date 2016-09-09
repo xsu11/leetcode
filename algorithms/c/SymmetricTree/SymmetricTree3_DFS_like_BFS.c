@@ -48,7 +48,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-// Add this struct difinition to scilent the show or error.
+// Add this struct difinition to silence the show or error.
 struct TreeNode {
 	int val;
 	struct TreeNode *left;

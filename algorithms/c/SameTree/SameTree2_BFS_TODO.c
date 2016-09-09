@@ -28,7 +28,7 @@
 
 // TODO - Add Queue structure and operations definitions.
 
-// Add this struct difinition to scilent the show or error.
+// Add this struct difinition to silence the show or error.
 struct TreeNode {
 	int val;
 	struct TreeNode *left;

@@ -23,6 +23,7 @@
  *     struct ListNode *next;
  * };
  */
+
 #include <stdio.h>
 
 unsigned long power(int base, int x) {

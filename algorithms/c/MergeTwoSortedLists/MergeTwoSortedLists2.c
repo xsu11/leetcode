@@ -19,6 +19,7 @@
  *     struct ListNode *next;
  * };
  */
+
 #include <stdio.h>
 #include <limits.h>
 

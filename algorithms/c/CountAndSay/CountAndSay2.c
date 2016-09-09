@@ -19,6 +19,7 @@
 
  Note: The sequence of integers will be represented as a string.
  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
