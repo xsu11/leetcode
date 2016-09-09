@@ -129,7 +129,6 @@ int maxDepth(struct TreeNode* root) {
 	struct TreeNode *curNode = NULL;
 	int depth = 0;
 	inqueue(queue, root, depth);
-
 	while ((curNode = dequeue(queue, &depth)) != NULL) {
 		if (curNode->left != NULL) {
 			inqueue(queue, curNode->left, depth + 1);

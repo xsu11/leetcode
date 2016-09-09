@@ -1,5 +1,5 @@
 /*
- * MaximumDepthofBinaryTree2.c
+ * MaximumDepthofBinaryTree3.c
  *
  *  Created on: Sep 09, 2016
  *      Author: xinsu
@@ -30,17 +30,15 @@ struct TreeNode {
 	struct TreeNode *right;
 };
 
-int maxTreeDepth(struct TreeNode* root, int depth) {
+int maxDepth(struct TreeNode* root) {
 	if (root == NULL) {
-		return depth;
+		return 0;
 	}
 
-	int lDepth = maxTreeDepth(root->left, depth + 1);
-	int rDepth = maxTreeDepth(root->right, depth + 1);
+	int lDepth = 1;
+	int rDepth = 1;
+	lDepth += maxDepth(root->left);
+	rDepth += maxDepth(root->right);
 
 	return (lDepth > rDepth) ? lDepth : rDepth;
-}
-
-int maxDepth(struct TreeNode* root) {
-	return maxTreeDepth(root, 0);
 }
