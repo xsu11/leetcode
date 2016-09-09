@@ -136,14 +136,14 @@ struct TreeNode *dequeue(struct QueueTreeNode *queue, int *info) {
 }
 /*** Queue operations definition end ***/
 
-int** levelOrder(struct TreeNode* root, int** columnSizes, int* returnSize) {
+int **levelOrder(struct TreeNode *root, int **columnSizes, int *returnSize) {
 	if (root == NULL) {
 		*columnSizes = NULL;
 		returnSize = NULL;
 		return NULL;
 	}
 
-	// First use BFSQueue to do BFS, but put all the dequeued elements into additionalQueue.
+	// First use BFSQueue do BFS, but put all the dequeued elements into queue2.
 	struct QueueTreeNode *BFSQueue = create();
 	struct QueueTreeNode *additionalQueue = create();
 	struct TreeNode *curTreeNode = NULL;
@@ -151,7 +151,7 @@ int** levelOrder(struct TreeNode* root, int** columnSizes, int* returnSize) {
 	inqueue(BFSQueue, root, level);
 
 	while ((curTreeNode = dequeue(BFSQueue, &level)) != NULL) {
-		inqueue(additionalQueue, curTreeNode, level); // put all elements into additionalQueue
+		inqueue(additionalQueue, curTreeNode, level); // put all elements into queue2
 		if (curTreeNode->left != NULL) {
 			inqueue(BFSQueue, curTreeNode->left, level + 1);
 		}
@@ -165,7 +165,7 @@ int** levelOrder(struct TreeNode* root, int** columnSizes, int* returnSize) {
 	// alloc memory for columnSizes based on returnSize
 	*columnSizes = (int *) calloc(*returnSize, sizeof(int));
 
-	// Then traverse the additionalQueue and store the columnSizes
+	// Then traverse the queue2 and store the columnSizes
 	struct QueueNode *curQueueNode = additionalQueue->front;
 	while (curQueueNode != NULL) {
 		columnSizes[0][curQueueNode->info]++;
@@ -181,7 +181,7 @@ int** levelOrder(struct TreeNode* root, int** columnSizes, int* returnSize) {
 		columnSizes[0][i] = 0;
 	}
 
-	// Traverse additionalQueue again and set result
+	// Traverse queue2 again and set result
 	curQueueNode = additionalQueue->front;
 	while (curQueueNode != NULL) {
 		result[curQueueNode->info][columnSizes[0][curQueueNode->info]] =
