@@ -143,20 +143,20 @@ int** levelOrder(struct TreeNode* root, int** columnSizes, int* returnSize) {
 		return NULL;
 	}
 
-	// First use queue1 do BFS, but put all the dequeued elements into queue2.
-	struct QueueTreeNode *queue1 = create();
-	struct QueueTreeNode *queue2 = create();
+	// First use BFSQueue do BFS, but put all the dequeued elements into queue2.
+	struct QueueTreeNode *BFSQueue = create();
+	struct QueueTreeNode *additionalQueue = create();
 	struct TreeNode *curTreeNode = NULL;
 	int level = 0;
-	inqueue(queue1, root, level);
+	inqueue(BFSQueue, root, level);
 
-	while ((curTreeNode = dequeue(queue1, &level)) != NULL) {
-		inqueue(queue2, curTreeNode, level); // put all elements into queue2
+	while ((curTreeNode = dequeue(BFSQueue, &level)) != NULL) {
+		inqueue(additionalQueue, curTreeNode, level); // put all elements into queue2
 		if (curTreeNode->left != NULL) {
-			inqueue(queue1, curTreeNode->left, level + 1);
+			inqueue(BFSQueue, curTreeNode->left, level + 1);
 		}
 		if (curTreeNode->right != NULL) {
-			inqueue(queue1, curTreeNode->right, level + 1);
+			inqueue(BFSQueue, curTreeNode->right, level + 1);
 		}
 	}
 
@@ -166,7 +166,7 @@ int** levelOrder(struct TreeNode* root, int** columnSizes, int* returnSize) {
 	*columnSizes = (int *) calloc(*returnSize, sizeof(int));
 
 	// Then traverse the queue2 and store the columnSizes
-	struct QueueNode *curQueueNode = queue2->front;
+	struct QueueNode *curQueueNode = additionalQueue->front;
 	while (curQueueNode != NULL) {
 		columnSizes[0][curQueueNode->info]++;
 		curQueueNode = curQueueNode->next;
@@ -182,7 +182,7 @@ int** levelOrder(struct TreeNode* root, int** columnSizes, int* returnSize) {
 	}
 
 	// Traverse queue2 again and set result
-	curQueueNode = queue2->front;
+	curQueueNode = additionalQueue->front;
 	while (curQueueNode != NULL) {
 		result[curQueueNode->info][columnSizes[0][curQueueNode->info]] =
 				curQueueNode->data->val;
@@ -190,7 +190,7 @@ int** levelOrder(struct TreeNode* root, int** columnSizes, int* returnSize) {
 		curQueueNode = curQueueNode->next;
 	}
 
-	destroy(queue1);
-	destroy(queue2);
+	destroy(BFSQueue);
+	destroy(additionalQueue);
 	return result;
 }
