@@ -124,7 +124,6 @@ int maxDepth(struct TreeNode* root) {
 		return 0;
 	}
 
-	// First use queue1 do BFS, but put all the dequeued elements into queue2.
 	struct QueueTreeNode *queue = create();
 	struct TreeNode *curNode = NULL;
 	int depth = 0;
