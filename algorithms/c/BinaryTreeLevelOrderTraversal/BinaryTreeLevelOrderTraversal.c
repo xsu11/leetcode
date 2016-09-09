@@ -13,9 +13,9 @@
  Given binary tree [3,9,20,null,null,15,7],
  3
  / \
- 9  20
+  9  20
  /  \
-   15  7
+   15   7
  return its level order traversal as:
  [
  [3],
@@ -149,7 +149,6 @@ int **levelOrder(struct TreeNode *root, int **columnSizes, int *returnSize) {
 	struct TreeNode *curTreeNode = NULL;
 	int level = 0;
 	inqueue(BFSQueue, root, level);
-
 	while ((curTreeNode = dequeue(BFSQueue, &level)) != NULL) {
 		inqueue(additionalQueue, curTreeNode, level); // put all elements into queue2
 		if (curTreeNode->left != NULL) {
@@ -184,9 +183,9 @@ int **levelOrder(struct TreeNode *root, int **columnSizes, int *returnSize) {
 	// Traverse queue2 again and set result
 	curQueueNode = additionalQueue->front;
 	while (curQueueNode != NULL) {
-		result[curQueueNode->info][columnSizes[0][curQueueNode->info]] =
-				curQueueNode->data->val;
-		columnSizes[0][curQueueNode->info]++;
+		level = curQueueNode->info;
+		result[level][columnSizes[0][level]] = curQueueNode->data->val;
+		columnSizes[0][level]++;
 		curQueueNode = curQueueNode->next;
 	}
 
