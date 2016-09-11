@@ -54,7 +54,7 @@ void generateLine(int numRows, int *columnSizes, int **result) {
 	result[idx][i] = 1;
 }
 
-int** generate(int numRows, int** columnSizes) {
+int **generate(int numRows, int **columnSizes) {
 	if (numRows <= 0) {
 		*columnSizes = NULL;
 		return NULL;

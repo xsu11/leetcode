@@ -30,7 +30,7 @@
 
 #include <stdio.h>
 
-int** generate(int numRows, int** columnSizes) {
+int **generate(int numRows, int **columnSizes) {
 	if (numRows <= 0) {
 		*columnSizes = NULL;
 		return NULL;
