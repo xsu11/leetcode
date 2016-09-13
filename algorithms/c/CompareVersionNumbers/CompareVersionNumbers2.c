@@ -27,7 +27,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int compareVersion(char* version1, char* version2) {
+int compareVersion(char *version1, char *version2) {
 	int length1 = strlen(version1);
 	int length2 = strlen(version2);
 

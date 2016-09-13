@@ -31,7 +31,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int compareVersion(char* version1, char* version2) {
+int compareVersion(char *version1, char *version2) {
 	char *token1 = version1;
 	char *token2 = version2;
 	int ver1 = 0;
