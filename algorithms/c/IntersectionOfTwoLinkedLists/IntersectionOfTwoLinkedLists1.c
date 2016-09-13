@@ -53,6 +53,10 @@ struct ListNode {
 
 struct ListNode *getIntersectionNode(struct ListNode *headA,
 		struct ListNode *headB) {
+	if (headA == NULL || headB == NULL) {
+		return NULL;
+	}
+
 	struct ListNode *curA = headA;
 	struct ListNode *curB = headB;
 
