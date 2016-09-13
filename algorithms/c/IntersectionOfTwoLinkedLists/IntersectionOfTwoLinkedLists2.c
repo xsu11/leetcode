@@ -1,5 +1,5 @@
 /*
- * IntersectionOfTwoLinkedLists.c
+ * IntersectionOfTwoLinkedLists2.c
  *
  *  Created on: Sep 12, 2016
  *      Author: xinsu
