@@ -45,29 +45,32 @@ struct ListNode {
 	struct ListNode *next;
 };
 
-int getListLength(struct ListNode *head) {
+int getListLength(struct ListNode *curNode) {
 	int length = 0;
-	while (head != NULL) {
+	while (curNode != NULL) {
 		length++;
-		head = head->next;
+		curNode = curNode->next;
 	}
 	return length;
 }
 
 struct ListNode *getIntersectionNode(struct ListNode *headA,
 		struct ListNode *headB) {
-	int lengthA = getListLength(headA);
-	int lengthB = getListLength(headB);
+	if (headA == NULL || headB == NULL) {
+		return NULL;
+	}
 
+	int diffLength = getListLength(headA) - getListLength(headB);
 	struct ListNode *curA = headA;
 	struct ListNode *curB = headB;
+
 	int i = 0;
-	if (lengthA > lengthB) {
-		for (i = 0; i < lengthA - lengthB; i++) {
+	if (diffLength > 0) {
+		for (i = 0; i < diffLength; i++) {
 			curA = curA->next;
 		}
 	} else {
-		for (i = 0; i < lengthB - lengthA; i++) {
+		for (i = 0; i < diffLength * (-1); i++) {
 			curB = curB->next;
 		}
 	}
