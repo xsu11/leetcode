@@ -4,10 +4,10 @@
  *  Created on: Sep 13, 2016
  *      Author: xinsu
  *
- * 1	A		1
- * 2	B		2
+ * 1	A		1 (26 x 0 + A)
+ * 2	B		2 (26 x 0 + B)
  * 3	...
- * 4	Z		26
+ * 4	Z		26 (26 x 0 + Z)
  * 5	AA		26 x 1 + 1 (26 x A + A)
  * 6	AB		26 x 1 + 2 (26 x A + B)
  * 7	...		...
