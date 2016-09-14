@@ -21,7 +21,7 @@
  0.1 < 1.1 < 1.2 < 13.37
  Credits:
  Special thanks to @ts for adding this problem and creating all test cases.
- * */
+ */
 
 #include <stdio.h>
 #include <string.h>
