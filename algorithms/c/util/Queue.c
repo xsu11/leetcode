@@ -1,37 +1,22 @@
 /*
- * QueueTreeNode.c
+ * Queue.c
  *
- *  Created on: Sep 09, 2016
+ *  Created on: Sep 17, 2016
  *      Author: xinsu
- */
-
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     struct TreeNode *left;
- *     struct TreeNode *right;
- * };
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
-struct TreeNode {
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-};
-
 /*** Queue structure definition ***/
 struct QueueNode {
 	int info;
-	struct TreeNode *data;
+	void *data;
 	struct QueueNode *next;
 };
 
-struct QueueTreeNode {
+struct Queue {
 	int size;
 	struct QueueNode *front;
 	struct QueueNode *back;
@@ -39,13 +24,16 @@ struct QueueTreeNode {
 /*** Queue structure definition end ***/
 
 /*** Queue operations definition ***/
-struct QueueTreeNode *create() {
-	struct QueueTreeNode *queue = (struct QueueTreeNode *) calloc(1,
-			sizeof(struct QueueTreeNode));
+struct Queue *create() {
+	struct Queue *queue = (struct Queue *) calloc(1, sizeof(struct Queue));
+	// automatically...
+	// queue->size = 0;
+	// queue->front = NULL;
+	// queue->back = NULL;
 	return queue;
 }
 
-void destroy(struct QueueTreeNode *queue) {
+void destroy(struct Queue *queue) {
 	if (queue != NULL) {
 		if (queue->front != NULL) {
 			struct QueueNode *curNode = queue->front;
@@ -59,7 +47,7 @@ void destroy(struct QueueTreeNode *queue) {
 	}
 }
 
-struct QueueNode *head(struct QueueTreeNode *queue) {
+struct QueueNode *head(struct Queue *queue) {
 	if (queue == NULL || queue->size == 0) {
 		return NULL;
 	}
@@ -67,7 +55,7 @@ struct QueueNode *head(struct QueueTreeNode *queue) {
 	return queue->front;
 }
 
-bool inqueue(struct QueueTreeNode *queue, struct TreeNode *data, int info) {
+bool inqueue(struct Queue *queue, void *data, int info) {
 	if (queue == NULL) {
 		return false;
 	}
@@ -75,6 +63,7 @@ bool inqueue(struct QueueTreeNode *queue, struct TreeNode *data, int info) {
 	// alloc memory for new node
 	struct QueueNode *node = (struct QueueNode *) calloc(1,
 			sizeof(struct QueueNode));
+
 	node->data = data;
 	node->info = info;
 
@@ -89,13 +78,13 @@ bool inqueue(struct QueueTreeNode *queue, struct TreeNode *data, int info) {
 	return true;
 }
 
-struct TreeNode *dequeue(struct QueueTreeNode *queue, int *info) {
+void *dequeue(struct Queue *queue, int *info) {
 	if (queue == NULL || queue->size == 0) {
 		return NULL;
 	}
 
 	struct QueueNode *node = queue->front;
-	struct TreeNode *data = node->data;
+	void *data = node->data;
 	if (info != NULL) {
 		*info = node->info;
 	}
@@ -106,8 +95,10 @@ struct TreeNode *dequeue(struct QueueTreeNode *queue, int *info) {
 	} else {
 		queue->front = queue->front->next;
 	}
+
 	queue->size--;
 	free(node);
+
 	return data;
 }
 /*** Queue operations definition end ***/
