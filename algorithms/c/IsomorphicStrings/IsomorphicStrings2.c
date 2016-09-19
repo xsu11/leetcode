@@ -41,8 +41,8 @@ bool isIsomorphic(char* s, char* t) {
 		return false;
 	}
 
-	char *sMap = (char *) calloc(256, sizeof(char));
-	char *tMap = (char *) calloc(256, sizeof(char));
+	char sMap[256] = { '\0' };
+	char tMap[256] = { '\0' };
 
 	int i = 0;
 	for (i = 0; i < sLength; i++) {
@@ -56,7 +56,5 @@ bool isIsomorphic(char* s, char* t) {
 		}
 	}
 
-	free(sMap);
-	free(tMap);
 	return true;
 }
