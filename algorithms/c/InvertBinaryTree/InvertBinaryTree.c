@@ -3,9 +3,9 @@
  *
  *  Created on: Sep 20, 2016
  *      Author: xinsu
- * 
+ *
  * Recursive solution.
- * Another solution is to use queue to implement BFS.
+ * Another solution is to use a queue to implement BFS.
  */
 
 /*
@@ -54,11 +54,8 @@ struct TreeNode *invertTree(struct TreeNode *root) {
 		return NULL;
 	}
 
-	invertTree(root->left);
-	invertTree(root->right);
-
-	struct TreeNode * l = root->left;
-	root->left = root->right;
+	struct TreeNode *l = invertTree(root->left);
+	root->left = invertTree(root->right);
 	root->right = l;
 
 	return root;
