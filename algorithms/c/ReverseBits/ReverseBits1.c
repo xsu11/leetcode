@@ -26,8 +26,8 @@ uint32_t getbit(uint32_t x, int i) {
 	return (x >> i) & 1;
 }
 
-uint32_t setbit(uint32_t x, int i, uint32_t v) {
-	return (x & ~(1 << i)) | (v << i);
+uint32_t setbit(uint32_t x, int i, uint32_t val) {
+	return (x & ~(1 << i)) | (val << i);
 }
 
 uint32_t invertbit(uint32_t x, int i) {
