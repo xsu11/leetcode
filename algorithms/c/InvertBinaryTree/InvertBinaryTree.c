@@ -3,6 +3,9 @@
  *
  *  Created on: Sep 20, 2016
  *      Author: xinsu
+ * 
+ * Recursive solution.
+ * Another solution is to use queue to implement BFS.
  */
 
 /*
