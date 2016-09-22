@@ -1,5 +1,5 @@
 /*
- * LowestCommonAncestorOfBST2.c
+ * LowestCommonAncestorOfBST3.c
  *
  *  Created on: Sep 22, 2016
  *      Author: xinsu
