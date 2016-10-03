@@ -63,12 +63,17 @@ char *longestPalindrome(char *s) {
 		} else if (p[j] > range) {
 			p[i] = range;
 		} else {
+			// the condition is: range > 0 && p[j] <= range
 			p[i] = p[j];
 		}
 
 		// if range <= 0, then i <= right, it will go into this while
 		// else if p[j] > range, then p[i] needs to expand further to get p[i], it will go into this while
 		// else, it won't go into this while
+		//
+		// each case when it goes into the while, it will check the expansion starting from the max(right, i)
+		// and later we will set the right boundry to this new one (i + p[i])
+		// therefore this while loop will only run at most sLength times during the entire for loop.
 		while (t[i - p[i] - 1] == t[i + p[i] + 1]) {
 			p[i]++;
 		}
@@ -80,7 +85,8 @@ char *longestPalindrome(char *s) {
 		}
 
 		// set new right boundry and new center if necessary
-		int boundryLength = p[i] + i;
+		// iff range > 0 && p[j] > range, it may set the new boundry (if p[i] + i = range then it won't set)
+		int boundryLength = i + p[i];
 		if (boundryLength > right) {
 			center = i;
 			right = boundryLength;
