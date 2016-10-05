@@ -187,6 +187,7 @@ int dllCompar(const void *a, const void *b, int length) {
 
 int **threeSum(int *nums, int numsSize, int *returnSize) {
 	if (nums == NULL || numsSize < 3) {
+		*returnSize = 0;
 		return NULL;
 	}
 
