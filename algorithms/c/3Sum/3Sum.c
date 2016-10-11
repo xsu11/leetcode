@@ -146,7 +146,7 @@ void *delete(struct Dll *dll, int idx, int *info) {
 	return data;
 }
 
-bool exists(struct Dll *dll, void *d,
+bool exists(struct Dll *dll, void *d, int len,
 		int (*compar)(const void *a, const void *b, int length)) {
 	if (dll == NULL || d == NULL || compar == NULL) {
 		return false;
@@ -154,7 +154,7 @@ bool exists(struct Dll *dll, void *d,
 
 	struct DllNode *curNode = dll->tail;
 	while (curNode != NULL) {
-		if (compar(curNode->data, d, 3)) {
+		if (compar(curNode->data, d, len)) {
 			return true;
 		}
 		curNode = curNode->prev;
@@ -220,7 +220,7 @@ int **threeSum(int *nums, int numsSize, int *returnSize) {
 				// check if this result is in the dll
 				// if it is already existed, free it
 				// else, add it to dll
-				if (exists(dll, (void *) r, dllCompar)) {
+				if (exists(dll, (void *) r, 3, dllCompar)) {
 					free(r);
 				} else {
 					add(dll, dll->size, (void *) r, NULL);
