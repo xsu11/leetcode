@@ -4,7 +4,8 @@
  *  Created on: Oct 11, 2016
  *      Author: xinsu
  *
- * Dynamic programming (iteration), with O(n * returnSize) time and O(n^3) space.
+ * Dynamic programming (iteration), with O(n * returnSize) time and O(n^3 + n * returnSize) space.
+ * The table has fixed space usage: O(n^3). The results array use O(n * returnSize) space.
  */
 
 /*
@@ -57,8 +58,7 @@ void fillColumns(int n, struct D ***d, char **results, int returnSize, int col,
 					results[row][col] = ')';
 
 					d[i][j - 1]->count[row][0] = d[i][j]->count[row][0];
-					d[i][j - 1]->count[row][1] = d[i][j]->count[row][1]
-							- (short) 1;
+					d[i][j - 1]->count[row][1] = d[i][j]->count[row][1] - 1;
 					row--;
 				}
 				d[i][j - 1]->repeat++;
@@ -69,8 +69,7 @@ void fillColumns(int n, struct D ***d, char **results, int returnSize, int col,
 					row = nextRow(d[i][j]->count, row, 0);
 					results[row][col] = '(';
 
-					d[i - 1][j]->count[row][0] = d[i][j]->count[row][0]
-							- (short) 1;
+					d[i - 1][j]->count[row][0] = d[i][j]->count[row][0] - 1;
 					d[i - 1][j]->count[row][1] = d[i][j]->count[row][1];
 					row--;
 				}
@@ -169,4 +168,25 @@ char **generateParenthesis(int n, int *returnSize) {
 	free(d);
 
 	return results;
+}
+
+int main() {
+	int returnSize = 0;
+
+//	for (int i = 0; i < returnSize; i++) {
+//		printf("%s\n", results[i]);
+//	}
+
+	for (int i = 10; i < 16; i++) {
+		char **results = generateParenthesis(i, &returnSize);
+		printf("i = %d, returnSize = %d\n", i, returnSize);
+	}
+	/*
+	 i = 10, returnSize = 16796
+	 i = 11, returnSize = 58786
+	 i = 12, returnSize = 208012
+	 i = 13, returnSize = 742900
+	 i = 14, returnSize = 2674440
+	 i = 15, returnSize = 9694845
+	 */
 }
