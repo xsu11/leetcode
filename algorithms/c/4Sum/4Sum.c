@@ -186,6 +186,13 @@ int dllCompar(const void *a, const void *b, int length) {
 	return 1;
 }
 
+/*
+ * void qsort(void *base,									// array
+ * 			  size_t nel,									// number of elements in the array
+ * 			  size_t width,									// width of element in the array
+ *			  int (*compar)(const void *, const void *));	// comparison function
+ */
+
 int **fourSum(int *nums, int numsSize, int target, int *returnSize) {
 	if (nums == NULL || numsSize < 3) {
 		*returnSize = 0;
