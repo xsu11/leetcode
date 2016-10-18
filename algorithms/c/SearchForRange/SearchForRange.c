@@ -38,6 +38,10 @@ int compar(const void *a, const void *b) {
 }
 
 int *searchRange(int *nums, int numsSize, int target, int *returnSize) {
+	if (nums == NULL || numsSize < 0 || returnSize == NULL) {
+		return NULL;
+	}
+
 	*returnSize = 2;
 	int *result = (int *) calloc(*returnSize, sizeof(int));
 	result[0] = -1;
