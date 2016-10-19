@@ -1,10 +1,8 @@
 /*
  * CombinationSum.c
  *
- *  Created on: Oct 18, 2016
+ *  Created on: Oct 19, 2016
  *      Author: xinsu
- *
- * Iteration
  */
 
 /*
