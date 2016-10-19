@@ -190,11 +190,13 @@ void genParens(int left, int right, struct Dll *dll, char *s, int idx) {
 			// add left paren to r
 			s[idx] = '(';
 			genParens(left - 1, right, dll, s, idx + 1);
+			s[idx] = '\0';
 		}
 		if (right > 0) {
 			// add right paren to r
 			s[idx] = ')';
 			genParens(left, right - 1, dll, s, idx + 1);
+			s[idx] = '\0';
 		}
 	} else {
 		/*
@@ -211,6 +213,7 @@ void genParens(int left, int right, struct Dll *dll, char *s, int idx) {
 		// add left paren to r
 		s[idx] = '(';
 		genParens(left - 1, right, dll, s, idx + 1);
+		s[idx] = '\0';
 	}
 }
 
