@@ -37,9 +37,9 @@ struct Dll {
 	struct DllNode *head;
 	struct DllNode *tail;
 };
-/*** Doubly Linked Lis structure definition end ***/
+/*** Doubly Linked List structure definition end ***/
 
-/*** Doubly Linked Lis operations definition ***/
+/*** Doubly Linked List operations definition ***/
 struct Dll *create() {
 	struct Dll *dll = (struct Dll *) calloc(1, sizeof(struct Dll));
 	return dll;
@@ -158,7 +158,7 @@ bool exists(struct Dll *dll, void *d,
 
 	return false;
 }
-/*** Doubly Linked Lis operations definition end ***/
+/*** Doubly Linked List operations definition end ***/
 
 /**
  * Return an array of arrays of size *returnSize.
