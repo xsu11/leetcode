@@ -128,6 +128,7 @@ void *delete(struct Dll *dll, int idx, int *info) {
 			dll->tail = dll->tail->prev;
 			dll->tail->next = NULL;
 		} else {
+			node = dll->head;
 			for (int i = 0; i < idx + 1; i++) {
 				node = node->next;
 			}
