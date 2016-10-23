@@ -27,16 +27,35 @@
 
 #include <stdio.h>
 
-int gcd( i, j) {
-	while (i != j) {
-		if (i > j) {
-			i -= j;
-		} else {
-			j -= i;
-		}
+//int gcd(int i, int j) {
+//	while (i != j) {
+//		if (i > j) {
+//			i -= j;
+//		} else {
+//			j -= i;
+//		}
+//	}
+//
+//	return i;
+//}
+
+// iterative version of gcd
+//int gcd(int a, int b) {
+//	while (b != 0) {
+//		int c = a % b;
+//		a = b;
+//		b = c;
+//	}
+//
+//	return a;
+//}
+
+int gcd(int a, int b) {
+	if (b == 0) {
+		return a;
 	}
 
-	return i;
+	return gcd(b, a % b);
 }
 
 void rotate(int *nums, int numsSize, int k) {
