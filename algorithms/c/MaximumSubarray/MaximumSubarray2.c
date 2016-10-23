@@ -16,7 +16,8 @@
  click to show more practice.
 
  More practice:
- If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
+ If you have figured out the O(n) solution,
+ try coding another solution using the divide and conquer approach, which is more subtle.
  */
 
 #include <stdio.h>
@@ -32,26 +33,26 @@ int getMaxSubArray(int *nums, int numsSize, int l, int r) {
 
 	int m = l + (r - l) / 2;
 
-	int lM = nums[m];
+	int crossLMax = nums[m];
 	int sum = nums[m];
 	for (int i = m - 1; i > l - 1; i--) {
 		sum += nums[i];
-		if (lM < sum) {
-			lM = sum;
+		if (crossLMax < sum) {
+			crossLMax = sum;
 		}
 
 	}
 
-	int rM = nums[m + 1];
+	int crossRMax = nums[m + 1];
 	sum = nums[m + 1];
 	for (int i = m + 2; i < r + 1; i++) {
 		sum += nums[i];
-		if (rM < sum) {
-			rM = sum;
+		if (crossRMax < sum) {
+			crossRMax = sum;
 		}
 	}
 
-	int crossMax = lM + rM;
+	int crossMax = crossLMax + crossRMax;
 	int lMax = getMaxSubArray(nums, numsSize, l, m);
 	int rMax = getMaxSubArray(nums, numsSize, m + 1, r);
 
