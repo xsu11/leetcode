@@ -1,10 +1,10 @@
 /*
  * ImplementStrStr1.c
  *
- *  Created on: Sep 03, 2016
+ *  Created on: Sep 04, 2016
  *      Author: xinsu
  *
- * This FSM algorithm has a problem: it won't check back.
+ * Brutal force
  */
 
 /*
@@ -14,11 +14,30 @@
  */
 
 #include <stdio.h>
+#include <stdbool.h>
 
-#define START 0
-#define OUT 1
-#define IN 2
-#define END 3
+bool equals(char *t, char *p, int pLen) {
+	int i = 0;
+
+	while (i < pLen) {
+		if (t[i] != p[i]) {
+			return false;
+		}
+		i++;
+	}
+
+	return true;
+}
+
+int naiveStringMatcher(char *text, int tLen, char *pattern, int pLen) {
+	for (int i = 0; i < tLen - pLen + 1; i++) {
+		if (equals(text + i, pattern, pLen)) {
+			return i;
+		}
+	}
+
+	return -1;
+}
 
 int strStr(char* haystack, char* needle) {
 	if (needle[0] == '\0') {
@@ -27,52 +46,12 @@ int strStr(char* haystack, char* needle) {
 		return -1;
 	}
 
-	int result = -1;
-	int state = START;
+	int hLen = strlen(haystack);
+	int nLen = strlen(needle);
 
-	int h = 0;
-	int n = 0;
-	while (state != END) {
-		if (state == START) {
-			if (haystack[h] != needle[n]) {
-				// start finding, not start match
-				state = OUT;
-			} else {
-				// start match
-				result = h;
-				n++;
-				state = IN;
-			}
-		} else if (state == OUT) {
-			if (haystack[h] != '\0' && needle[n] != '\0') {
-				if (haystack[h] == needle[n]) {
-					// start match
-					result = h;
-					state = IN;
-				}
-				n++;
-			} else {
-				state = END;
-			}
-		} else if (state == IN) {
-			if (haystack[h] != '\0' && needle[n] != '\0') {
-				if (haystack[h] != needle[n]) {
-					// stop match
-					result = -1;
-					state = OUT;
-				}
-				n++;
-			} else if (needle[n] == '\0') {
-				// find match;
-				state = END;
-			} else {
-				// haystack goes to the end, not find
-				result = -1;
-				state = END;
-			}
-		}
-		h++;
+	if (hLen < nLen) {
+		return -1;
 	}
 
-	return result;
+	return naiveStringMatcher(haystack, hLen, needle, nLen);
 }
