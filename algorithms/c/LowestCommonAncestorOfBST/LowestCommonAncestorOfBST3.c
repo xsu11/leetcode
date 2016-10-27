@@ -55,6 +55,8 @@ struct TreeNode* lowestCommonAncestor(struct TreeNode* root, struct TreeNode* p,
 		return root;
 	}
 
+	// the condition here is: (root->val - p->val) * (root->val - q->val) > 0
+	// which means this root is still on the way to to LCA
 	root = (root->val > p->val) ? root->left : root->right;
 	return lowestCommonAncestor(root, p, q);
 }

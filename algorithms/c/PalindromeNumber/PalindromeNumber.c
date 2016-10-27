@@ -33,6 +33,7 @@ bool isPalindrome(int x) {
 		return false;
 	}
 
+	// get the length of x
 	int length = 0;
 	int a = x;
 	while (a != 0) {
@@ -41,7 +42,7 @@ bool isPalindrome(int x) {
 	}
 
 	int i = 0;
-	int n[length];
+	int *n = (int *) calloc(length, sizeof(int));
 	while (x != 0) {
 		n[i++] = x % 10;
 		x /= 10;
@@ -49,9 +50,13 @@ bool isPalindrome(int x) {
 
 	for (i = 0; i < length / 2; i++) {
 		if (n[i] != n[length - 1 - i]) {
+			free(n);
+
 			return false;
 		}
 	}
+
+	free(n);
 
 	return true;
 }

@@ -4,12 +4,19 @@
  *  Created on: Oct 11, 2016
  *      Author: xinsu
  *
- * Dynamic programming (iteration), with O(n * returnSize) time and O(n^3 + n * returnSize) space.
- * The table has fixed space usage: O(n^3). The results array use O(n * returnSize) space.
+ * Dynamic programming (iteration),
+ * with O(n * returnSize) time and O(n^2 + n^2 * returnSize) space.
+ *
+ * The table has fixed space usage: O(n^2). The results array use O(n^2 * returnSize) space.
+ * However, the table can be re-used during the filling out.
+ * Thus the table space can be reduced to n * returnSize.
+ *
+ * The returnSize is generally O(n^n), primitively computing it as close to O(n^(n - 2)).
  */
 
 /*
- Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+ Given n pairs of parentheses,
+ write a function to generate all combinations of well-formed parentheses.
 
  For example, given n = 3, a solution set is:
 
@@ -47,7 +54,7 @@ int nextRow(short **count, int row, int col) {
 void fillColumns(int n, struct D ***d, char **results, int returnSize, int col,
 		int i, int j) {
 
-	// the while loop fills one diagnal line, which fill one column in results array
+	// the while loop fills one diagonal line, which fill one column in results array
 	while (j < i + 1) {
 		int row = returnSize - 1;
 
@@ -173,9 +180,11 @@ char **generateParenthesis(int n, int *returnSize) {
 int main() {
 	int returnSize = 0;
 
-//	for (int i = 0; i < returnSize; i++) {
-//		printf("%s\n", results[i]);
-//	}
+	/*
+	 for (int i = 0; i < returnSize; i++) {
+	 printf("%s\n", results[i]);
+	 }
+	 */
 
 	for (int i = 10; i < 16; i++) {
 		char **results = generateParenthesis(i, &returnSize);

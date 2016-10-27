@@ -37,7 +37,9 @@ bool isValidSudoku(char** board, int boardRowSize, int boardColSize) {
 			if (board[column][row] != '.') {
 				// get the index that board[col][row] should be in the matrix
 				int index = board[column][row] - '1';
+
 				// get which block that board[col][row] is in the blocks matrix
+				// it mush calculate column / 3 first because of the truncate of integer's division
 				int block = column / 3 * 3 + row / 3;
 
 				if (rows[row][index] == true || columns[column][index] == true

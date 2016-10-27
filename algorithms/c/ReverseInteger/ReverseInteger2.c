@@ -30,7 +30,7 @@
 
 int reverse(int x) {
 	int result = 0;
-	int remain;
+	int remain = 0;
 
 	while (x != 0) {
 		remain = x % 10;

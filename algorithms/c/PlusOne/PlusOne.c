@@ -37,7 +37,7 @@ int* plusOne(int* digits, int digitsSize, int* returnSize) {
 	}
 
 	if (i == -1) {
-		// All positions in digits are 9s. Use resultLong to add 1 to the front of digits and return it.
+		// All positions in digits are 9s. Add 1 to the front of the result and set all rest 0.
 		result = (int *) calloc(digitsSize + 1, sizeof(int));
 		result[0] = 1;
 		*returnSize = digitsSize + 1;

@@ -166,6 +166,7 @@ bool isSymmetric(struct TreeNode* root) {
 				return false;
 			} else if (lNode->data->left == NULL && rNode->data->right == NULL
 					&& lNode->data->right == NULL && rNode->data->left == NULL) {
+				// These two nodes are both leaves. They also have the same value, so they are symmetric.
 				pop(lStack, NULL);
 				pop(rStack, NULL);
 			} else {

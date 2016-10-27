@@ -69,8 +69,7 @@ void rotate(int *nums, int numsSize, int k) {
 		k = numsSize - k;
 	}
 
-	int i = 0;
-	for (i = 0; i < gcd(k, numsSize); i++) {
+	for (int i = 0; i < gcd(k, numsSize); i++) {
 		int t = nums[i];
 		int this = i;
 		int next = this + k;

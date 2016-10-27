@@ -5,6 +5,9 @@
  *      Author: xinsu
  *
  * Count by bit.
+ * n		: xx...xx100..00 (n has i zeros at the end, 0 <= i <= 32)
+ * n - 1	: xx...xx011..11 (n - 1 makes the i zeros to 1s and the i+1 1 to 0)
+ * n & (n - 1)	: xx...xx000..00 (n & (n - 1) makes the i + 1 postions at the end to 1s, which change the i + 1 i in n to 0)
  */
 
 /*

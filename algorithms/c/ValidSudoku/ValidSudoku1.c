@@ -89,5 +89,6 @@ bool isValidSudoku(char** board, int boardRowSize, int boardColSize) {
 	}
 
 	free(s);
+
 	return true;
 }

@@ -38,6 +38,8 @@ struct ListNode* removeNthFromEnd(struct ListNode* head, int n) {
 		curNode = curNode->next;
 	}
 
+	// as the input n is always valid
+	// if curNode == NULL after moving forward n nodes, then the to-be-deleted node is the head
 	if (curNode == NULL) {
 		head = head->next;
 		return head;

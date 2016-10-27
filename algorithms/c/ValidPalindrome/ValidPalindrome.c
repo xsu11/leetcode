@@ -27,6 +27,9 @@ bool isPalindrome(char* s) {
 	int i = 0;
 	int j = strlen(s) - 1;
 	while (i < j) {
+		// isalnum(int c) checks if the input char is alphanumeric.
+		// If it is, this function returns a non-zero digit.
+		// this function is included in ctype.h
 		int iIsAlnum = isalnum((int) s[i]);
 		int jIsAlnum = isalnum((int) s[j]);
 

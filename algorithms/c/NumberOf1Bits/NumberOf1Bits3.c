@@ -22,19 +22,19 @@
 #include <stdint.h>
 
 int hammingWeight(uint32_t n) {
-	uint32_t m1 = 0x55555555; // 0101 0101 0101 0101 0101 0101 0101 0101
-	uint32_t m2 = 0x33333333; // 0011 0011 0011 0011 0011 0011 0011 0011
-	uint32_t m4 = 0x0f0f0f0f; // 0000 1111 0000 1111 0000 1111 0000 1111
-	uint32_t m8 = 0x00ff00ff; // 0000 0000 1111 1111 0000 0000 1111 1111
+	uint32_t m1 = 0x55555555;  // 0101 0101 0101 0101 0101 0101 0101 0101
+	uint32_t m2 = 0x33333333;  // 0011 0011 0011 0011 0011 0011 0011 0011
+	uint32_t m4 = 0x0f0f0f0f;  // 0000 1111 0000 1111 0000 1111 0000 1111
+	uint32_t m8 = 0x00ff00ff;  // 0000 0000 1111 1111 0000 0000 1111 1111
 	uint32_t m16 = 0x0000ffff; // 0000 0000 0000 0000 1111 1111 1111 1111
 
 	uint32_t x = n;
 
-	x -= (x >> 1) & m1; // put count of each 2 bits into those 2 bits
+	x -= (x >> 1) & m1;		// put count of each 2 bits into those 2 bits
 	x = (x & m2) + ((x >> 2) & m2); // put count of each 4 bits into those 4 bits
-	x = (x + (x >> 4)) & m4; // put count of each 8 bits into those 8 bits
-	x += x >> 8; // put count of each 16 bits into their lowest 8 bits, without clear higher bits
-	x += x >> 16; // put count of each 32 bits into their lowest 8 bits, without clear higher bits
+	x = (x + (x >> 4)) & m4;	// put count of each 8 bits into those 8 bits
+	x += x >> 8;			// put count of each 16 bits into their lowest 8 bits, without clearing higher bits
+	x += x >> 16;			// put count of each 32 bits into their lowest 8 bits, without clearing higher bits
 
 	// Only retrieve the lowest 6 bits, for the result is at most 32 which can be represented in 6 bits.
 	return x & 0x3f;

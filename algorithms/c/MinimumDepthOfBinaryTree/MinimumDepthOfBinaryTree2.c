@@ -44,6 +44,7 @@ int minDepth(struct TreeNode* root) {
 		return minDepth(root->right) + 1;
 	}
 
+	// the condition here is: root->left != NULL && root->right != NULL
 	int lMinDepth = 1;
 	int rMinDepth = 1;
 	lMinDepth += minDepth(root->left);

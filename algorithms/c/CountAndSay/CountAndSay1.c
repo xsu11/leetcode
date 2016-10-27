@@ -55,6 +55,8 @@ char *countNext(char *s, int ith, int n) {
 	newS[j] = '\0';
 
 	free(s);
+
+	// this tail recursion can be transformed into a iteration
 	return countNext(newS, ith + 1, n);
 }
 

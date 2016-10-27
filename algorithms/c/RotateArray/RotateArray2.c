@@ -38,11 +38,9 @@ void rotate(int *nums, int numsSize, int k) {
 	}
 
 	int t = 0;
-
 	for (; k > -1; k--) {
 		t = nums[numsSize - 1];
-		int i = numsSize - 2;
-		for (; i > -1; i--) {
+		for (int i = numsSize - 2; i > -1; i--) {
 			nums[i + 1] = nums[i];
 		}
 	}

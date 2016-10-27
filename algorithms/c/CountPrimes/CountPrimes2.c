@@ -33,7 +33,7 @@ int countPrimes(int n) {
 	}
 
 	int result = 0;
-	char *primes = (char *) calloc(n, sizeof(char));
+	char *primes = (char *) calloc(n + 1, sizeof(char));
 
 	int i = 2;
 	for (i = 2; i < n; i++) {

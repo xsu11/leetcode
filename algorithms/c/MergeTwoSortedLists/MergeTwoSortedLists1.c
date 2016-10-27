@@ -21,7 +21,6 @@
  */
 
 #include <stdio.h>
-#include <limits.h>
 
 struct ListNode *mergeTwoLists(struct ListNode *l1, struct ListNode *l2) {
 	struct ListNode *result = NULL;

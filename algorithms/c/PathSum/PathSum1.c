@@ -146,9 +146,14 @@ bool hasPathSum(struct TreeNode* root, int sum) {
 			result = true;
 		}
 
+		// the condition here is:
+		// curNode->left != NULL || curNode->right != NULL || curSum != sum
+		// therefore, if curNode->left != NULL, inqueue it
+		// if curNode->right != NULL, inqueue it
 		if (curNode->left != NULL) {
 			inqueue(queue, curNode->left, curSum + curNode->left->val);
 		}
+
 		if (curNode->right != NULL) {
 			inqueue(queue, curNode->right, curSum + curNode->right->val);
 		}

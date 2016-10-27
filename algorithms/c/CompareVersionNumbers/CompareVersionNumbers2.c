@@ -44,7 +44,7 @@ int compareVersion(char *version1, char *version2) {
 		ver1 = 0;
 		ver2 = 0;
 
-		// Warn: when the following parsings happen, here is no check for illegal input!
+		// Warning: when the following parsings happen, here is no check for illegal input!
 
 		// parse version1
 		while (i1 < length1 && isdigit(version1[i1])) {

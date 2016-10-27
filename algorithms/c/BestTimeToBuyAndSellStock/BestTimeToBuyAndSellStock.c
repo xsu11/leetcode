@@ -34,10 +34,10 @@ int maxProfit(int* prices, int pricesSize) {
 	int min = prices[0];
 	int max = prices[0];
 
-	int i = 1;
-	for (i = 1; i < pricesSize; i++) {
+	for (int i = 1; i < pricesSize; i++) {
 		if (prices[i] > max) {
 			max = prices[i];
+
 			if (result < max - min) {
 				result = max - min;
 			}

@@ -45,11 +45,11 @@ int **generate(int numRows, int **columnSizes) {
 	int i = 0;
 	for (i = 0; i < numRows; i++) {
 		columnSizes[0][i] = i + 1;
+		result[i] = (int *) calloc(columnSizes[0][i], sizeof(int));
 	}
 
 	// create Pascal Triangle line by line
 	for (i = 1; i < numRows; i++) {
-		result[i] = (int *) calloc(columnSizes[0][i], sizeof(int));
 		result[i][0] = 1;
 		int j = 1;
 		for (j = 1; j < columnSizes[0][i] - 1; j++) {

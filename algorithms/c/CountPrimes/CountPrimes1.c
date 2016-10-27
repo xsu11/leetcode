@@ -46,7 +46,7 @@ int countPrimes(int n) {
 
 	int i = 2;
 	for (i = 2; i < n; i++) {
-		if (isPrime(n) == true) {
+		if (isPrime(i) == true) {
 			result++;
 		}
 	}

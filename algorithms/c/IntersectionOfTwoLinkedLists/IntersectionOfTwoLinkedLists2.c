@@ -3,6 +3,9 @@
  *
  *  Created on: Sep 12, 2016
  *      Author: xinsu
+ * 
+ * First compute the difference of the length (diffLength) of the two lists,
+ * then make the longer list move forward diffLength steps, then make the two move forward together until they meet.
  */
 
 /*

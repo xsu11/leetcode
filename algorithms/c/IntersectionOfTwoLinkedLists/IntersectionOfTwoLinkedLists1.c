@@ -9,6 +9,13 @@
  *                                              d1 → d2 → ... → dr → NULL
  *                                             ↗
  * B:  b1 → b2 → ... → bq  →  c1 → c2 → ... → cp
+ * 
+ * The list of a_i has p nodes. The list of b_i has q nodes.
+ * The list of c_i has p nodes. THe list of d_i has r nodes.
+ * 
+ * We put two pointers at A and B's begining.
+ * When we traverse A(B) to the end, we immediately start again to traverse B(A).
+ * If both pointers finish traversing the two lists, they will, they will meet each other at the intersection.
  */
 
 /*

@@ -148,14 +148,19 @@ int **levelOrder(struct TreeNode *root, int **columnSizes, int *returnSize) {
 	// First use BFSQueue do BFS, but put all the dequeued elements into queue2.
 	struct QueueTreeNode *BFSQueue = create();
 	struct QueueTreeNode *additionalQueue = create();
+
 	struct TreeNode *curTreeNode = NULL;
 	int level = 0;
+
 	inqueue(BFSQueue, root, level);
+
 	while ((curTreeNode = dequeue(BFSQueue, &level)) != NULL) {
 		inqueue(additionalQueue, curTreeNode, level); // put all elements into queue2
+
 		if (curTreeNode->left != NULL) {
 			inqueue(BFSQueue, curTreeNode->left, level + 1);
 		}
+
 		if (curTreeNode->right != NULL) {
 			inqueue(BFSQueue, curTreeNode->right, level + 1);
 		}
@@ -185,9 +190,8 @@ int **levelOrder(struct TreeNode *root, int **columnSizes, int *returnSize) {
 	// Traverse queue2 again and set result
 	curQueueNode = additionalQueue->front;
 	while (curQueueNode != NULL) {
-		level = curQueueNode->info;
-		result[level][columnSizes[0][level]] = curQueueNode->data->val;
-		columnSizes[0][level]++;
+		result[level][columnSizes[0][curQueueNode->info]] = curQueueNode->data->val;
+		columnSizes[0][curQueueNode->info]++;
 		curQueueNode = curQueueNode->next;
 	}
 

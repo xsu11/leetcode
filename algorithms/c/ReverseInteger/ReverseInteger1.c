@@ -16,12 +16,10 @@
 
  If the integer's last digit is 0, what should the output be? ie, cases such as 10, 100.
 
- Did you notice that the reversed integer might overflow? Assume the input is a 32-bit integer, then the reverse of 1000000003 overflows. How should you handle such cases?
+ Did you notice that the reversed integer might overflow? Assume the input is a 32-bit integer,
+ then the reverse of 1000000003 overflows. How should you handle such cases?
 
  For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
-
- Update (2014-11-10):
- Test cases had been added to test the overflow behavior.
  */
 
 #include <stdio.h>
@@ -45,7 +43,7 @@ int reverse(int x) {
 		return 0;
 	}
 
-	// get sign and a absolute value of x
+	// get sign and an absolute value of x
 	int sign = x > 0 ? 1 : -1;
 	int absX = x * sign; // absolute value of x
 
@@ -62,6 +60,7 @@ int reverse(int x) {
 	if (length == maxLength) {
 		// seperate INT_MAX to bits
 		int *maxBits = seperateInt(INT_MAX, maxLength);
+
 		i = 0;
 		while (i < length && bits[i] >= maxBits[length - 1 - i]) {
 			if (bits[i] > maxBits[length - 1 - i]) {

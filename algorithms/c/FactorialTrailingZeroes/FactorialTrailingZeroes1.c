@@ -3,6 +3,9 @@
  *
  *  Created on: Sep 14, 2016
  *      Author: xinsu
+ * 
+ * Use prime factorization to find how many 2 and 5 n! has.
+ * Because the n! must has enought 2s, the problem becomes how manys 5 does it contain.
  */
 
 /*

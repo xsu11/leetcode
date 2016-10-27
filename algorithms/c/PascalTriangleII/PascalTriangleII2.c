@@ -36,14 +36,12 @@ int *getRow(int rowIndex, int *returnSize) {
 	int *result = (int *) calloc(*returnSize, sizeof(int));
 
 	// start from the 0-th row and get to the target
-	int i = 0;
-	for (i = 0; i < *returnSize; i++) {
+	for (int i = 0; i < *returnSize; i++) {
 		// first set the additional element of the new row to 1
 		result[i] = 1;
 
 		// then get all other elements from previous row, backward
-		int j = i - 1;
-		for (; j > 0; j--) {
+		for (int j = i - 1; j > 0; j--) {
 			result[j] = result[j] + result[j - 1];
 		}
 	}

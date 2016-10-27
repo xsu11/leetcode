@@ -32,7 +32,7 @@ char *countAndSay(int n) {
 		return r;
 	}
 
-	// do tail recursion
+	// do recursion
 	char *s = countAndSay(n - 1);
 
 	int length = strlen(s);

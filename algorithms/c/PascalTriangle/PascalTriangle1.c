@@ -42,7 +42,7 @@ void generateLine(int numRows, int *columnSizes, int **result) {
 		return;
 	}
 
-	// do tail recursion
+	// do recursion
 	generateLine(numRows - 1, columnSizes, result);
 
 	// create the line
@@ -68,7 +68,7 @@ int **generate(int numRows, int **columnSizes) {
 		columnSizes[0][i] = i + 1;
 	}
 
-	// Call the tail-recursive function to finish the work.
+	// Call the recursive function to finish the work.
 	generateLine(numRows, *columnSizes, result);
 	return result;
 }

@@ -4,7 +4,7 @@
  *  Created on: Sep 17, 2016
  *      Author: xinsu
  *
- * Bottom-up method. This method doesn't use an additional array to save the rob solution.
+ * Bottom-up method. This method also uses an additional array to save the rob solution.
  */
 
 /*
