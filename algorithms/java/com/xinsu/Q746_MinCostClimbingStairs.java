@@ -47,7 +47,7 @@ public class Q746_MinCostClimbingStairs {
         return Math.min(f(cost, cost.length - 2), f(cost, cost.length - 1));
     }
 
-    // f(i) = min(f(i -1), f(i-2)) + cost[i]
+    // f(i) = min(f(i - 2), f(i - 1)) + cost[i]
     // f: minimum cost of standing on step "i"
     // i: the index of cost
     private int f(final int[] cost, final int i) {

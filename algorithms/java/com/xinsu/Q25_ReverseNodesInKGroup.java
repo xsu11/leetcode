@@ -51,7 +51,7 @@ public class Q25_ReverseNodesInKGroup {
         // 0   ->   3   ->   2   ->   1   ->   4   ->   5   ->   6   ->   7   ->   8   ->   null
 
         while (end.next != null) {
-            // invariant: end is pointing at the end of last goup
+            // invariant: end is pointing at the end of last group
             // dummy                       end
             // 0   ->   (3   ->   2   ->   1)   ->   4   ->   5   ->   6   ->   7   ->   8   ->   null
 
