@@ -17,6 +17,8 @@ public class Q123_BestTimeToBuyAndSellStockIII_Simplified {
         // maxProfit(k, i) = max(maxProfit(k, i-1), maxProfit(k-1, j-1) + p(i) - p(j))   (0<=j<=i-1)
         // maxProfit(k, i) = max(maxProfit(k, i-1), p(i) - (p(j) - maxProfit(k-1, j-1)))   (0<=j<=i-1)
 
+        // in this problem, only two trades are allowed, therefore k = 2
+
         // p(i) - (p(j) - maxProfit(k-1, j-1)) make this max means to make p(j) - maxProfit(k-1, j-1) minimum
         // the reason to convert from calculating maximum of maxProfit(k-1, j-1) + p(i) - p(j) to minimum of p(j) - maxProfit(k-1, j-1) is that
         // p(j) - maxProfit(k-1, j-1) has nothing to do with i, therefore can be simplified to use i to represent i and j at the same time

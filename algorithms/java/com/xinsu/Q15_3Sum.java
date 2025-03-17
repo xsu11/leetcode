@@ -53,20 +53,20 @@ public class Q15_3Sum {
 
         // traverse nums from beginning to nums[nums.length - 3], and only find other two on the right
         // since nums has been sorted, only traverse non-positives
-        int i = 0;
-        while (nums[i] <= 0 && i < nums.length - 2) {
-            final int target = 0 - nums[i];
+        for (int i = 0; nums[i] <= 0 && i < nums.length - 2; i++) {
+            final int expect = 0 - nums[i];
 
             // use two pointers
             int begin = i + 1;
             int end = nums.length - 1;
 
             while (begin < end) {
-                if (nums[begin] + nums[end] < target) {
+                final int actual = nums[begin] + nums[end];
+                if (actual < expect) {
                     begin++;
-                } else if (nums[begin] + nums[end] > target) {
+                } else if (actual > expect) {
                     end--;
-                } else { // nums[begin] + nums[end] == target
+                } else { // nums[begin] + nums[end] + nums[i] = 0
                     // found a combination, add to result
                     result.add(Arrays.asList(nums[i], nums[begin], nums[end]));
 
@@ -84,8 +84,6 @@ public class Q15_3Sum {
             while (i < nums.length - 2 && nums[i] == nums[i + 1]) {
                 i++;
             }
-
-            i++;
         }
 
         return result;

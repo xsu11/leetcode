@@ -15,6 +15,7 @@ public class Q103_BinaryTreeZigzagLevelOrderTraversal {
     }
 
     private void traverse(final TreeNode root, final List<List<Integer>> result, final int level) {
+        // bottom-up condition
         if (root == null) {
             return;
         }

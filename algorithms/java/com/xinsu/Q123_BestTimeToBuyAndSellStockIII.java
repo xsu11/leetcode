@@ -16,6 +16,8 @@ public class Q123_BestTimeToBuyAndSellStockIII {
         //
         // maxProfit(k, i) = max(maxProfit(k, i-1), maxProfit(k-1, j-1) + p(i) - p(j))   (0<=j<=i-1)
 
+        // in this problem, only two trades are allowed, therefore k = 2
+
         // create the 2-d array
         // use first dimension index from 0, that is for price on day i
         // but use second dimension index from 1, that is for trade k, index = 0 has value 0 representing an initial fake profit

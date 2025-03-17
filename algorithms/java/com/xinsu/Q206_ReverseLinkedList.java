@@ -11,18 +11,18 @@ public class Q206_ReverseLinkedList {
         }
 
         //                   head
-        // 1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null
+        // 1   ->   2   ->   3   ->   (4   ->   5   ->   6   ->   null)
 
         final ListNode newHead = reverseList(head.next);
 
-        //                   head                       newHead
-        // 1   ->   2   ->   3   ->   4   <-   5   <-   6   ->   null
+        //                   head                        newHead
+        // 1   ->   2   ->   3   ->   (4   <-   5   <-   6)
 
         head.next.next = head;
         head.next = null;
 
         //                   head                       newHead
-        // 1   ->   2   ->   3   <-   4   <-   5   <-   6   ->   null
+        // 1   ->   2   ->   3   <-   4   <-   5   <-   6
 
         return newHead;
     }

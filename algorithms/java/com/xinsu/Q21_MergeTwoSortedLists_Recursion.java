@@ -48,7 +48,7 @@ public class Q21_MergeTwoSortedLists_Recursion {
 
         final ListNode head = list1.val <= list2.val ? list1 : list2;
         /*
-         *                 head
+         *                  head
          *                  1   ->   2   ->   4   ->   null
          * x -> y -> z
          *                  2   ->   3   ->   5   ->   null
@@ -56,16 +56,16 @@ public class Q21_MergeTwoSortedLists_Recursion {
 
         final ListNode other = list1.val <= list2.val ? list2: list1;
         /*
-         *                         head.next
-         *               head     ->   2   ->   4   ->   null
+         *                             head.next
+         *                head    ->   2   ->   4   ->   null
          * x -> y -> z    1     /
          *                             2   ->   3   ->   5   ->   null
-         *                           other
+         *                             other
          */
 
         head.next = mergeTwoLists(head.next, other);
         /*
-         *                   head
+         *                    head
          * x -> y -> z   ->   1 -> 2 -> 2 -> 3 -> 4 -> 5   ->   null
          */
 

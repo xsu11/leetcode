@@ -17,10 +17,11 @@ public class Q46_Permutations {
         return result;
     }
 
+    // start: the start index of the range in nums that has not been added to current permutation result
     private void generatePermutations(int[] nums, int start, List<List<Integer>> result) {
         // bottom-up condition
         if (start == nums.length - 1) {
-            // last num, generated a permutation, add to result
+            // last num, just append to generate a permutation, add to result
             result.add(toList(nums));
             return;
         }
@@ -34,8 +35,8 @@ public class Q46_Permutations {
 
     private List<Integer> toList(int[] nums) {
         final List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++) {
-            list.add(nums[i]);
+        for (int num : nums) {
+            list.add(num);
         }
         return list;
     }
