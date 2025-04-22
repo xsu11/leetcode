@@ -36,29 +36,35 @@ package com.xinsu;
  * 0 <= cost[i] <= 999
  */
 
-public class Q746_MinCostClimbingStairs_Iteration_Simplified {
+public class Q746_MinCostClimbingStairs_Recursion {
 
     public int minCostClimbingStairs(int[] cost) {
-        // boundary case
-        if (cost.length < 2) {
-            return cost[cost.length - 1];
+        /*
+         * climbing to the top of stairs defined by cost is to stand on step "length" (length is the index of cost),
+         * however, since step "length", or "top", is imaginary and over its boundary, the min cost of standing on top
+         * of the stairs is: minCost(length) = min(f(i - 1), f(i - 2)) (without adding the cost of imaginary "top")
+         */
+        return Math.min(f(cost, cost.length - 2), f(cost, cost.length - 1));
+    }
+
+    // f(i) = min(f(i - 2), f(i - 1)) + cost[i]
+    // f: minimum cost of standing on step "i"
+    // i: the index of cost
+    private int f(final int[] cost, final int i) {
+        // bottom-up condition
+        if (i < 0) {
+            // need to log exceptional case
+            return 0;
         }
 
-        // cost.length >= 2
-
-        int i_2 = cost[0];
-        int i_1 = cost[1];
-
-        for (int i = 2; i < cost.length; i++) {
-            // calculate i
-            final int i_0 = Math.min(i_2, i_1) + cost[i];
-
-            // reset i_1 and I_2
-            i_2 = i_1;
-            i_1 = i_0;
+        if (i < 2) {
+            return cost[i];
         }
 
-        return Math.min(i_2, i_1);
+        // i >= 2
+
+        // recursion
+        return Math.min(f(cost, i - 2), f(cost, i - 1)) + cost[i];
     }
 
 }

@@ -5,7 +5,8 @@ import com.xinsu.util.ListNode;
 /*
  * Given the head of a linked list, reverse the nodes of the list k at a time, and return the modified list.
  *
- * k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a multiple of k then left-out nodes, in the end, should remain as it is.
+ * k is a positive integer and is less than or equal to the length of the linked list. If the number of nodes is not a
+ * multiple of k then left-out nodes, in the end, should remain as it is.
  *
  * You may not alter the values in the list's nodes, only nodes themselves may be changed.
  *
@@ -47,13 +48,21 @@ public class Q25_ReverseNodesInKGroup {
         ListNode end = dummy;
 
         // k = 3
-        // dummy/end
-        // 0   ->   3   ->   2   ->   1   ->   4   ->   5   ->   6   ->   7   ->   8   ->   null
+        // end
+        // dummy   ->   3   ->   2   ->   1   ->   4   ->   5   ->   6   ->   7   ->   8   ->   null
 
         while (end.next != null) {
-            // invariant: end is pointing at the end of last group
-            // dummy                       end
-            // 0   ->   (3   ->   2   ->   1)   ->   4   ->   5   ->   6   ->   7   ->   8   ->   null
+            /*
+             * invariant: end is pointing at the end of last group
+             *
+             * initially, end points to dummy which is the end of a "dummy group"
+             * end
+             * (dummy)   ->   3   ->   2   ->   1   ->   4   ->   5   ->   6   ->   7   ->   8   ->   null
+             *
+             * during the loop, end is pointing at the end of last group
+             *                                  end
+             * 0dummy   ->   (3   ->   2   ->   1)   ->   4   ->   5   ->   6   ->   7   ->   8   ->   null
+             */
 
             // use two pointers: set prev/start/end/next to proper position
             final ListNode prev = end;
@@ -61,42 +70,43 @@ public class Q25_ReverseNodesInKGroup {
             // move end k steps ahead to get a group
             for (int i = 0; i < k; i++) {
                 if (end.next == null) {
-                    // return from here when list length is not a multiple of k
-                    // dummy                                                                       end
-                    // 0   ->   (3   ->   2   ->   1)   ->   (6   ->   5   ->   4)   ->   7   ->   8   ->   null
+                    /*
+                     * return from here when list length is not a multiple of k
+                     * dummy   ->   (3   ->   2   ->   1)   ->   (6   ->   5   ->   4)   ->   7   ->   8   ->   null
+                     */
                     return dummy.next;
                 }
                 end = end.next;
             }
             final ListNode next = end.next;
 
-            // dummy                       prev       start             end       next
-            // 0   ->   (3   ->   2   ->   1)   ->   (4   ->   5   ->   6)   ->   7   ->   8   ->   null
+            //                                 prev       start             end       next
+            // dummy   ->   (3   ->   2   ->   1)   ->   (4   ->   5   ->   6)   ->   7   ->   8   ->   null
 
             // first, break group link
             end.next = null;
-            // dummy                       prev       start             end       next
-            // 0   ->   (3   ->   2   ->   1)   ->   (4   ->   5   ->   6)        7   ->   8   ->   null
+            //                                 prev       start             end       next
+            // dummy   ->   (3   ->   2   ->   1)   ->   (4   ->   5   ->   6)        7   ->   8   ->   null
 
             // then revert list [start, end]
             prev.next = reverseList(start); // reverseList() returns head of the reverted list, that is end
-            // dummy                       prev       end               start     next
-            // 0   ->   (3   ->   2   ->   1)   ->   (6   ->   5   ->   4)        7   ->   8   ->   null
+            //                                 prev       end               start     next
+            // dummy   ->   (3   ->   2   ->   1)   ->   (6   ->   5   ->   4)        7   ->   8   ->   null
 
             // finally connect group again
             start.next = next;
-            // dummy                       prev       end               start     next
-            // 0   ->   (3   ->   2   ->   1)   ->   (6   ->   5   ->   4)   ->   7   ->   8   ->   null
+            //                                 prev       end               start     next
+            // dummy   ->   (3   ->   2   ->   1)   ->   (6   ->   5   ->   4)   ->   7   ->   8   ->   null
 
             // step forward by move end to the end of the group, which now is start
             end = start;
-            // dummy                                                    end
-            // 0   ->   (3   ->   2   ->   1)   ->   (4   ->   5   ->   6)   ->   7   ->   8   ->   null
+            //                                                              end
+            // dummy   ->   (3   ->   2   ->   1)   ->   (4   ->   5   ->   6)   ->   7   ->   8   ->   null
         }
 
         // return from here only when list length is a multiple of k
-        // dummy                                                                                 end
-        // 0   ->   (3   ->   2   ->   1)   ->   (6   ->   5   ->   4)   ->   (7   ->   8   ->   9)   ->   null
+        //                                                                                           end
+        // dummy   ->   (3   ->   2   ->   1)   ->   (6   ->   5   ->   4)   ->   (7   ->   8   ->   9)   ->   null
         return dummy.next;
     }
 

@@ -56,8 +56,8 @@ public class Q3_LongestSubstringWithoutRepeatingCharacters {
                 }
             }
 
-            // if rightC appears in the [left, right] window, already reset left to the pos next to the appearance of rightC within window
-            // else, [left, right] expands to a longer substring
+            // if rightC appears in the [left, right] window, already reset left to the pos next to the appearance of
+            // rightC within window, else, [left, right] expands to a longer substring
             // now the new [left, right] is a newly found substring
             // calculate [left, right] length and compare
             final int length = right - left + 1;

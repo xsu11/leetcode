@@ -73,11 +73,11 @@ public class Q21_MergeTwoSortedLists {
             current = current.next;
 
             /*
-             *                           list1
-             *                       >   3  ->   4  ->   null
-             * dummy/current -> 1  /
-             *                           2   ->   4  ->   5  ->   null
-             *                           list2
+             *                      list1
+             *          current >   3  ->   4  ->   null
+             * dummy -> 1     /
+             *                      2   ->   4  ->   5  ->   null
+             *                      list2
              */
 
             /*

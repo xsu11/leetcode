@@ -36,11 +36,11 @@ public class Q42_TrappingRainWater {
 
         int water = 0;
 
-        // left/right cursor to traverse all heights
+        // left/right; cursor to traverse all heights
         int left = 0;
         int right = height.length - 1;
 
-        // leftMax/rightMax maximum height of left/right boundary
+        // leftMax/rightMax: maximum height of left/right boundary
         int leftMax = height[left];
         int rightMax = height[right];
 

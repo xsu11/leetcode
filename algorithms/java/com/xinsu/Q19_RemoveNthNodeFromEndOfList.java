@@ -45,6 +45,11 @@ public class Q19_RemoveNthNodeFromEndOfList {
         ListNode slow = head;
         ListNode fast = head;
 
+        /*
+         * head/slow/fast
+         * 1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null
+         */
+
         // move fast n steps
         for (int i = 0; i < n; i++) {
             if (fast == null) {

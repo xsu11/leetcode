@@ -66,10 +66,15 @@ public class Q21_MergeTwoSortedLists_Recursion {
         head.next = mergeTwoLists(head.next, other);
         /*
          *                    head
-         * x -> y -> z   ->   1 -> 2 -> 2 -> 3 -> 4 -> 5   ->   null
+         * x -> y -> z        1 -> 2 -> 2 -> 3 -> 4 -> 5   ->   null
          */
 
         return head;
+        /*
+         * after return, previous recursion connects its head to this returned "head"
+         *           previous head
+         * x -> y -> z   ->   1 -> 2 -> 2 -> 3 -> 4 -> 5   ->   null
+         */
     }
 
 }

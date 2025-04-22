@@ -49,6 +49,7 @@ public class Q15_3Sum {
         }
 
         Arrays.sort(nums);
+
         final List<List<Integer>> result = new ArrayList<>();
 
         // traverse nums from beginning to nums[nums.length - 3], and only find other two on the right
@@ -62,6 +63,7 @@ public class Q15_3Sum {
 
             while (begin < end) {
                 final int actual = nums[begin] + nums[end];
+
                 if (actual < expect) {
                     begin++;
                 } else if (actual > expect) {
