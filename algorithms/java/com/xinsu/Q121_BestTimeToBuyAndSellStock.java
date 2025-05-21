@@ -39,22 +39,22 @@ public class Q121_BestTimeToBuyAndSellStock {
             return maxP;
         }
 
-        int min = prices[0];
+        int globalMinPrice = prices[0];
 
         for (int i = 1; i < prices.length; i++) {
-            // min always represents a day before day i, that is a buy
+            // globalMinPrice always represents a day before day i, that is a buy
 
             // if sell on day i, what profit can get
-            int currentProfit = prices[i] - min;
+            int currentProfit = prices[i] - globalMinPrice;
 
             // update max profit if possible
             if (currentProfit > maxP) {
                 maxP = currentProfit;
             }
 
-            // update min if day i's price is lower
-            if (prices[i] < min) {
-                min = prices[i];
+            // update globalMinPrice if day i's price is lower
+            if (prices[i] < globalMinPrice) {
+                globalMinPrice = prices[i];
             }
         }
 

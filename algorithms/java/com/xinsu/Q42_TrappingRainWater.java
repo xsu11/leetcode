@@ -40,26 +40,26 @@ public class Q42_TrappingRainWater {
         int left = 0;
         int right = height.length - 1;
 
-        // leftMax/rightMax: maximum height of left/right boundary
-        int leftMax = height[left];
-        int rightMax = height[right];
+        // leftHeightMax/rightHeightMax: maximum height of left/right boundary
+        int leftHeightMax = height[left];
+        int rightHeightMax = height[right];
 
         while (left < right) {
             // can only trap water from smaller side
-            if (leftMax < rightMax) {
+            if (leftHeightMax < rightHeightMax) {
                 // left step forward
                 left++;
 
-                // then compare left with current leftMax
-                leftMax = Math.max(leftMax, height[left]);
+                // then compare left with current leftHeightMax
+                leftHeightMax = Math.max(leftHeightMax, height[left]);
                 // this only calculate trapping water at this specific pos left
-                // this may trap water if leftMax > height[left], or not if height[left] is new leftMax
-                water += leftMax - height[left];
+                // this may trap water if leftHeightMax > height[left], or not if height[left] is new leftHeightMax
+                water += leftHeightMax - height[left];
             } else {
                 right--;
 
-                rightMax = Math.max(rightMax, height[right]);
-                water += rightMax - height[right];
+                rightHeightMax = Math.max(rightHeightMax, height[right]);
+                water += rightHeightMax - height[right];
             }
         }
 

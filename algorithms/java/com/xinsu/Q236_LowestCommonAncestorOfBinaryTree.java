@@ -42,16 +42,29 @@ public class Q236_LowestCommonAncestorOfBinaryTree {
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         // bottom-up condition
+        // for null node, just return null to indicate that no p/q are found in the tree of root
         if (root == null) {
             return null;
         }
 
+        // From Constraints: tree has more than 2 nodes.
+        // From Constraints: p and q will exist in the tree.
+        /*
+         * Three cases:
+         * 1. root has no children: root is leaf and must be p/q. This happens ONLY when the other is root's sibling
+         * 2. root has one child: either root is p/q, or p/q are in its child's subtree
+         * 3. root has two children: either root is p/q, or p/q are in its children's subtree
+         * For case 2 and 3: if root is p/q, the other one must be in subtree, otherwise, go to each subtree
+         */
         if (root == p || root == q) {
             return root;
         }
 
         final TreeNode left = lowestCommonAncestor(root.left, p, q);
         final TreeNode right = lowestCommonAncestor(root.right, p, q);
+
+        // Either p/q are in the same subtree of root: left/right has only one non-null returned
+        // or p/q are in different subtrees of root: left and right are both non-null returned
 
         // if p and q are in different subtrees, common ancestor can only be the root of these two subtrees
         if (left != null && right != null) {

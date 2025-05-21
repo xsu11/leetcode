@@ -34,7 +34,7 @@ import com.xinsu.util.ListNode;
  * Both list1 and list2 are sorted in non-decreasing order.
  */
 
-public class Q21_MergeTwoSortedLists {
+public class Q21_MergeTwoSortedLists_Iteration {
 
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         // boundary case

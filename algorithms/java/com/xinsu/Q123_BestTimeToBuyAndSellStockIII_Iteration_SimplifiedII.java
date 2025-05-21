@@ -38,7 +38,7 @@ import java.util.Arrays;
  * 0 <= prices[i] <= 105
  */
 
-public class Q123_BestTimeToBuyAndSellStockIII_SimplifiedII {
+public class Q123_BestTimeToBuyAndSellStockIII_Iteration_SimplifiedII {
 
     public int maxProfit(int[] prices) {
         // boundary case

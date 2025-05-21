@@ -53,7 +53,7 @@ public class Q25_ReverseNodesInKGroup {
 
         while (end.next != null) {
             /*
-             * invariant: end is pointing at the end of last group
+             * invariant: end is pointing at the end of last group, and is the pos for prev for next loop
              *
              * initially, end points to dummy which is the end of a "dummy group"
              * end
@@ -67,6 +67,7 @@ public class Q25_ReverseNodesInKGroup {
             // use two pointers: set prev/start/end/next to proper position
             final ListNode prev = end;
             final ListNode start = prev.next;
+
             // move end k steps ahead to get a group
             for (int i = 0; i < k; i++) {
                 if (end.next == null) {
