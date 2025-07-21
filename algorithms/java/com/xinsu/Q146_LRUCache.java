@@ -5,7 +5,7 @@ import com.xinsu.util.Node;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
+/**
  * Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
  *
  * Implement the LRUCache class:
@@ -50,11 +50,10 @@ import java.util.Map;
 public class Q146_LRUCache {
 
     private final int capacity;
+    // double linked list to be the queue
+    private final Node dummy = new Node(); // next points to the head, prev points to the end
+    // hashmap to support searching in the queue, every key points to the node(value) in the queue
     private final Map<Integer, Node> cache = new HashMap<>();
-
-    // dummy.next points to head that is the most recently used node
-    // dummy.prev points to tail that is the least recently used node
-    private final Node dummy = new Node();
 
     public Q146_LRUCache(int capacity) {
         this.capacity = capacity;
@@ -63,55 +62,71 @@ public class Q146_LRUCache {
     }
 
     public int get(int key) {
-        final Node node = getNode(key);
-        return node == null ? -1 : node.value;
+        final Node node = accessNode(key);
+        return node != null ? node.value : -1;
     }
 
     public void put(int key, int value) {
-        final Node node = getNode(key);
+        final Node node = accessNode(key);
+
         if (node != null) {
-            // found node, update
+            // node found, then update its value
             node.value = value;
             return;
-        }
+        } // else node not found, need to create a new one
 
+        // if cache is full, need to remove first
         if (this.cache.size() == this.capacity) {
-            // meet capacity, need to remove least recently used node
-            final Node lruNode = this.dummy.prev;
-            this.cache.remove(lruNode.key);
-            removeNode(lruNode);
+            removeLRUNode();
         }
 
-        // node not found, insert node to the head
-        final Node newNode = new Node(key, value);
-        this.cache.put(key, newNode);
-        putNodeHead(newNode);
+        // now cache has vacancy
+        // create new node then put to the head
+        createNewNode(key, value);
     }
 
-    private Node getNode(int key) {
+    // 等值点查
+    private Node accessNode(final int key) {
         if (!this.cache.containsKey(key)) {
             return null;
         }
 
         final Node node = this.cache.get(key);
 
-        // remove node then put node to the head
+        // move this node to head: remove node then put to head
         removeNode(node);
-        putNodeHead(node);
+        putHeadNode(node);
 
         return node;
     }
 
-    private void putNodeHead(Node node) {
-        node.next = this.dummy.next;
-        node.prev = this.dummy;
-        node.next.prev = node;
-        node.prev.next = node;
+    private void removeLRUNode() {
+        // cache is full, need to remove LRU node
+        final Node lruNode = this.dummy.prev;
+        removeNode(lruNode);
+        this.cache.remove(lruNode.key);
     }
 
-    private void removeNode(Node node) {
+    private void createNewNode(int key, int value) {
+        final Node newHead = new Node(key, value);
+        putHeadNode(newHead);
+        this.cache.put(key, newHead);
+    }
+
+    private void removeNode(final Node node) {
+        // (node.prev) -> node -> (node.next)
         node.prev.next = node.next;
         node.next.prev = node.prev;
+    }
+
+    private void putHeadNode(final Node head) {
+        // (dummy) -> (dummy.next)
+        head.prev = this.dummy;
+        head.next = this.dummy.next;
+
+        // (head.prev) -> head -> (head.next)
+        head.prev.next = head;
+        head.next.prev = head;
     }
 
 }

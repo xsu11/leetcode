@@ -47,10 +47,11 @@ public class Q206_ReverseLinkedList_Iteration {
             //          prev     cur     next
             // 1   <-   2        3   ->   4   ->   5   ->   null
 
+            // reverse cur
             cur.next = prev;
-            prev = cur;
 
             // step forward
+            prev = cur;
             cur = next;
 
             //                   prev     cur

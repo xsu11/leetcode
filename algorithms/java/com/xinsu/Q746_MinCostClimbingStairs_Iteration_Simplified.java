@@ -1,6 +1,6 @@
 package com.xinsu;
 
-/*
+/**
  * You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.
  *
  * You can either start from the step with index 0, or the step with index 1.
@@ -40,8 +40,12 @@ public class Q746_MinCostClimbingStairs_Iteration_Simplified {
 
     public int minCostClimbingStairs(int[] cost) {
         // boundary case
-        if (cost.length < 2) {
-            return cost[cost.length - 1];
+        if (cost.length == 0) {
+            return 0;
+        }
+
+        if (cost.length == 1) {
+            return cost[0];
         }
 
         // cost.length >= 2
@@ -53,7 +57,7 @@ public class Q746_MinCostClimbingStairs_Iteration_Simplified {
             // calculate i
             final int i_0 = Math.min(i_2, i_1) + cost[i];
 
-            // reset i_1 and I_2
+            // update i_1 and I_2 for next loop
             i_2 = i_1;
             i_1 = i_0;
         }

@@ -2,7 +2,7 @@ package com.xinsu;
 
 import com.xinsu.util.ListNode;
 
-/*
+/**
  * Given the head of a linked list, remove the nth node from the end of the list and return its head.
  *
  *
@@ -41,13 +41,15 @@ public class Q19_RemoveNthNodeFromEndOfList {
             return null;
         }
 
-        ListNode slowPrev = null;
+        final ListNode dummy = new ListNode(0, head);
+
+        ListNode prev = dummy;
         ListNode slow = head;
         ListNode fast = head;
 
         /*
-         * head/slow/fast
-         * 1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null
+         * prev         head/slow/fast
+         * dummy   ->   1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null
          */
 
         // move fast n steps
@@ -59,46 +61,50 @@ public class Q19_RemoveNthNodeFromEndOfList {
             fast = fast.next;
         }
 
-        if (fast == null) {
-            /*
-             * n = 6
-             * head/slow                                             fast
-             * 1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null
-             */
-            // n == list length, remove head;
-            head = head.next;
-            return head;
-        }
-
         /*
          * n = 3
-         * head/slow                  fast
-         * 1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null
+         * prev         head/slow                  fast
+         * dummy   ->   1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null
+         */
+        /*
+         * n = 6
+         * prev         head/slow                                             fast
+         * dummy   ->   1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null, n == list length, remove head;
          */
 
         // move slow/fast together to the end of the list
         while (fast != null) {
-            slowPrev = slow;
+            prev = slow;
             slow = slow.next;
             fast = fast.next;
         }
 
         /*
          * n = 3
-         * head              slowPrev slow                       fast
-         * 1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null
+         *              head              prev     slow                       fast
+         * dummy   ->   1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null
+         */
+        /*
+         * n = 6
+         * prev         head/slow                                             fast
+         * dummy   ->   1   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null, n == list length, remove head;
          */
 
         // remove slow
-        slowPrev.next = slow.next;
+        prev.next = slow.next;
 
         /*
          * n = 3
-         * head              slowPrev                   fast
-         * 1   ->   2   ->   3   ->   5   ->   6   ->   null
+         *              head              prev                       fast
+         * dummy   ->   1   ->   2   ->   3   ->   5   ->   6   ->   null
+         */
+        /*
+         * n = 6
+         * prev                                                      fast
+         * dummy   ->   2   ->   3   ->   4   ->   5   ->   6   ->   null, n == list length, remove head;
          */
 
-        return head;
+        return dummy.next;
     }
 
 }

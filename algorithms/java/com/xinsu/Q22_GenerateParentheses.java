@@ -46,7 +46,9 @@ public class Q22_GenerateParentheses {
             return;
         }
 
-        // leftUsed is ALWAYS >= rightUsed
+        // leftUsed >= rightUsed
+        // leftUsed <= n
+        // rightUsed <= n
         if (leftUsed > rightUsed) {
             // next pos can be a leftUsed OR rightUsed
 

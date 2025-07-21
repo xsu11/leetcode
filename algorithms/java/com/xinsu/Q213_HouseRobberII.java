@@ -51,6 +51,10 @@ public class Q213_HouseRobberII {
 
     private int f(final int[] nums, final int begin, final int end) {
         final int length = end - begin + 1;
+        if (length == 0) {
+            return 0;
+        }
+
         if (length == 1) {
             return nums[begin];
         }

@@ -39,7 +39,7 @@ public class Q46_Permutations {
         }
 
         final List<List<Integer>> result = new ArrayList<>();
-        generatePermutations(nums, 0, result);
+        generatePermutations(nums, 0, nums.length - 1, result);
         return result;
     }
 
@@ -47,19 +47,20 @@ public class Q46_Permutations {
     private void generatePermutations(
             final int[] nums,
             final int start,
+            final int end,
             final List<List<Integer>> result) {
         // bottom-up condition
-        if (start == nums.length - 1) {
+        if (start == end) {
             // last num, just append to generate a permutation, add to result
             result.add(toList(nums));
             return;
         }
 
         // from start to the end of nums, these are the elements that has not been traversed yet
-        for (int i = start; i < nums.length; i++) {
+        for (int i = start; i < end + 1; i++) {
             swap(nums, start, i);
             // after swap start with the i-th element, generate all permutations from start+1 to the end of nums
-            generatePermutations(nums, start + 1, result);
+            generatePermutations(nums, start + 1, end, result);
             // then swap back for next loop
             swap(nums, start, i);
         }

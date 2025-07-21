@@ -47,6 +47,7 @@ public class Q236_LowestCommonAncestorOfBinaryTree {
             return null;
         }
 
+        // WARNING:
         // From Constraints: tree has more than 2 nodes.
         // From Constraints: p and q will exist in the tree.
         /*
@@ -72,7 +73,7 @@ public class Q236_LowestCommonAncestorOfBinaryTree {
             return root;
         }
 
-        // otherwise, either q is in p's subtree or p is in q's subtree
+        // otherwise, either q is in p's subtree or p is in q's subtree, return the non-null one
         return left != null ? left : right;
     }
 

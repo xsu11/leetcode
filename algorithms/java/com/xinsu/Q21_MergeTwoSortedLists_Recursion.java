@@ -41,7 +41,6 @@ public class Q21_MergeTwoSortedLists_Recursion {
         if (list1 == null) {
             return list2;
         }
-
         if (list2 == null) {
             return list1;
         }

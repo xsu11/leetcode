@@ -37,22 +37,26 @@ import java.util.Map;
 public class Q3_LongestSubstringWithoutRepeatingCharacters {
 
     public int lengthOfLongestSubstring(final String s) {
+        // boundary case
+        if (s == null || s.isEmpty()) {
+            return 0;
+        }
+
         // store the char -> pos map that has been visited
-        final Map<Character, Integer> charLastPosMap = new HashMap<>();
+        final Map<Character, Integer> positions = new HashMap<>();
 
         int maxLength = 0;
 
         // use two pointers
-        int left = 0;
-        for (int right = 0; right < s.length(); right++) {
+        for (int left = 0, right = 0; right < s.length(); right++) {
             final char rightC = s.charAt(right);
 
-            if (charLastPosMap.containsKey(rightC)) {
+            if (positions.containsKey(rightC)) {
                 // rightC appeared before right, find the longest valid substring by resetting left
-                final Integer rightCharLastPos = charLastPosMap.get(rightC);
-                if (rightCharLastPos >= left) {
-                    // rightC appeared in [left, right), reset left to next pos of rightCharLastPos
-                    left = rightCharLastPos + 1;
+                final Integer rightPos = positions.get(rightC);
+                if (left <= rightPos) {
+                    // rightC appeared in [left, right), reset left to next pos of rightPos
+                    left = rightPos + 1;
                 }
             }
 
@@ -66,7 +70,7 @@ public class Q3_LongestSubstringWithoutRepeatingCharacters {
             }
 
             // rightC has been visited, now need to update/put pos for rightC
-            charLastPosMap.put(rightC, right);
+            positions.put(rightC, right);
         }
 
         return maxLength;

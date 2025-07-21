@@ -2,7 +2,7 @@ package com.xinsu;
 
 import java.util.PriorityQueue;
 
-/*
+/**
  * There is an infinite 2D plane.
  *
  * You are given a positive integer k. You are also given a 2D array queries, which contains the following queries:

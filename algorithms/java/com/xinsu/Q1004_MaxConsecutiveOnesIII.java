@@ -38,6 +38,7 @@ public class Q1004_MaxConsecutiveOnesIII {
             return 0;
         }
 
+        // if k is larger than nums length, simply return
         if (k >= nums.length) {
             return nums.length;
         }
@@ -48,6 +49,7 @@ public class Q1004_MaxConsecutiveOnesIII {
         // -1   0 1 4 5 9 12 13 14  19
         final List<Integer> zeros = getZeros(nums);
 
+        // WARNING: k also might be larger than zero counts in nums
         if (k >= zeros.size() - 2) {
             return nums.length;
         }

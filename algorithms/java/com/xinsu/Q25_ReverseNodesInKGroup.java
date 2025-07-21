@@ -38,13 +38,12 @@ public class Q25_ReverseNodesInKGroup {
 
     public ListNode reverseKGroup(ListNode head, int k) {
         // boundary case
-        if (head == null || k <= 0) {
-            return null;
+        if (head == null || head.next == null || k <= 0) {
+            return head;
         }
 
         // create dummy node to always point to the "head"
         final ListNode dummy = new ListNode(0, head);
-
         ListNode end = dummy;
 
         // k = 3
@@ -99,7 +98,7 @@ public class Q25_ReverseNodesInKGroup {
             //                                 prev       end               start     next
             // dummy   ->   (3   ->   2   ->   1)   ->   (6   ->   5   ->   4)   ->   7   ->   8   ->   null
 
-            // step forward by move end to the end of the group, which now is start
+            // step forward by moving end to the "new end" of the group, which now is start
             end = start;
             //                                                              end
             // dummy   ->   (3   ->   2   ->   1)   ->   (4   ->   5   ->   6)   ->   7   ->   8   ->   null
@@ -133,12 +132,13 @@ public class Q25_ReverseNodesInKGroup {
             // null     1   <-   2        3   ->   4   ->   null
 
             current.next = prev;
-            prev = current;
 
-            //                            prev/current   next
-            // null     1   <-   2   <-   3              4   ->   null
+
+            //                   prev     current  next
+            // null     1   <-   2   <-   3        4   ->   null
 
             // step forward
+            prev = current;
             current = next;
             //                            prev     current/next
             // null     1   <-   2   <-   3        4   ->   null

@@ -47,15 +47,13 @@ public class Q21_MergeTwoSortedLists_Iteration {
         }
 
         // create dummy and point to smaller node of list1/list2
-        final ListNode dummy = new ListNode();
-        dummy.next = list1.val <= list2.val ? list1 : list2;
-
-        ListNode current = dummy;
+        final ListNode dummy = new ListNode(0, list1.val <= list2.val ? list1 : list2);
+        ListNode cur = dummy;
 
         /*
          *                     list1
          *                 >   1   >   3  ->   4  ->   null
-         * dummy/current /
+         * dummy/cur     /
          *
          *                     2   ->   4  ->   5  ->   null
          *                     list2
@@ -63,18 +61,19 @@ public class Q21_MergeTwoSortedLists_Iteration {
 
         while (list1 != null && list2 != null) {
             if (list1.val <= list2.val) {
-                current.next = list1;
+                cur.next = list1;
                 list1 = list1.next;
             } else {
-                current.next = list2;
+                cur.next = list2;
                 list2 = list2.next;
             }
 
-            current = current.next;
+            // step forward
+            cur = cur.next;
 
             /*
              *                      list1
-             *          current >   3  ->   4  ->   null
+             *          cur     >   3  ->   4  ->   null
              * dummy -> 1     /
              *                      2   ->   4  ->   5  ->   null
              *                      list2
@@ -82,7 +81,7 @@ public class Q21_MergeTwoSortedLists_Iteration {
 
             /*
              *                               list1
-             *                   current     3  ->   4  ->   null
+             *                   cur         3  ->   4  ->   null
              * dummy -> 1   ->   2     \
              *                           >   4  ->   5  ->   null
              *                               list2
@@ -90,7 +89,7 @@ public class Q21_MergeTwoSortedLists_Iteration {
 
             /*
              *                                       list1
-             *                           current >   4  ->   null
+             *                           cur     >   4  ->   null
              * dummy -> 1   ->   2  ->   3     /
              *                                       4  ->   5  ->   null
              *                                       list2
@@ -98,17 +97,19 @@ public class Q21_MergeTwoSortedLists_Iteration {
 
             /*
              *                                                list1
-             *                                    current >   null
+             *                                    cur     >   null
              * dummy -> 1   ->   2  ->   3   ->   4     /
              *                                                4  ->   5  ->   null
              *                                                list2
              */
         }
 
-        current.next = list1 == null ? list2 : list1;
+        // when two lists' length are not equal, cur points to the end node of the shorter one,
+        // need to concat the longer list to cur.next
+        cur.next = list1 == null ? list2 : list1;
 
         /*
-         *                                    current
+         *                                    cur
          * dummy -> 1   ->   2  ->   3   ->   4   ->   4   ->   5   ->   null
          *                                             list2
          */

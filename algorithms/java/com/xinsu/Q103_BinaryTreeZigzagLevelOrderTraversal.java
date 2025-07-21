@@ -52,13 +52,14 @@ public class Q103_BinaryTreeZigzagLevelOrderTraversal {
             result.add(new LinkedList<>());
         }
 
-        // root level: 0 in natural order
+        // add root to current level
         final List<Integer> currentLevel = result.get(level);
+
         if (level % 2 == 0) {
-            // in natural order, add root to the end
+            // even level in natural order, add root to the end
             currentLevel.add(root.val);
         } else {
-            // in reverse order, add root to the beginning
+            // odd level in reverse order, add root to the beginning
             currentLevel.add(0, root.val);
         }
 
