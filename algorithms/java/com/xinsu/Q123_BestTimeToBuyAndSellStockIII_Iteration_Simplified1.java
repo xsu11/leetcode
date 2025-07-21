@@ -36,7 +36,7 @@ package com.xinsu;
  * 0 <= prices[i] <= 105
  */
 
-public class Q123_BestTimeToBuyAndSellStockIII_Iteration_Simplified {
+public class Q123_BestTimeToBuyAndSellStockIII_Iteration_Simplified1 {
 
     public int maxProfit(int[] prices) {
         // boundary case

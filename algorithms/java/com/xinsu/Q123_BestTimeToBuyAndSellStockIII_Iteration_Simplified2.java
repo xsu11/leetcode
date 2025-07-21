@@ -38,7 +38,7 @@ import java.util.Arrays;
  * 0 <= prices[i] <= 105
  */
 
-public class Q123_BestTimeToBuyAndSellStockIII_Iteration_SimplifiedIII {
+public class Q123_BestTimeToBuyAndSellStockIII_Iteration_Simplified2 {
 
     public int maxProfit(int[] prices) {
         // boundary case
@@ -68,9 +68,7 @@ public class Q123_BestTimeToBuyAndSellStockIII_Iteration_SimplifiedIII {
         // use first dimension index from 0, that is for price on day i
         // but use second dimension index from 1, that is for trade k, index = 0 has value 0 representing an initial fake profit
         final int trade = 2;
-
-        // only use 1-d array with length of the second dimension count of trade instead of 2-d array
-        final int[] maxProfit = new int[trade + 1];
+        final int[][] maxProfit = new int[trade + 1][prices.length];
 
         // min for p(j) - maxProfit(k-1, j-1)
         // only use the second dimension count of min to use each min for the first dimension prices,
@@ -82,18 +80,12 @@ public class Q123_BestTimeToBuyAndSellStockIII_Iteration_SimplifiedIII {
             for (int k = 1; k < trade + 1; k++) {
                 // before setting: min[k] is min from last i - 1
                 // after setting: min[k] is min for this i
-
-                // before setting: maxProfit[k - 1] is maxProfit[k - 1][i - 1] from last loop i - 1
-                // after setting: maxProfit[k - 1] does not change
-                min[k] = Math.min(min[k], prices[i] - maxProfit[k - 1]);
-
-                // before setting: maxProfit[k] is maxProfit[k][i - 1] from last loop i - 1
-                // after setting: maxProfit[k] is maxProfit[k][i] for this loop i
-                maxProfit[k] = Math.max(maxProfit[k], prices[i] - min[k]);
+                min[k] = Math.min(min[k], prices[i] - maxProfit[k - 1][i - 1]);
+                maxProfit[k][i] = Math.max(maxProfit[k][i - 1], prices[i] - min[k]);
             }
         }
 
-        return maxProfit[trade];
+        return maxProfit[trade][prices.length - 1];
     }
 
 }
