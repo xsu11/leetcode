@@ -31,12 +31,16 @@ package com.xinsu;
 
 public class Q70_ClimbingStairs {
 
+    /**
+     * f(i) = f(i-1) + f(i-2), i > 1
+     * f(0) = 1
+     * f(1) = 1
+     */
     public int climbStairs(int n) {
         // boundary case
         if (n < 0) {
             return 0;
         }
-
         if (n == 0 || n == 1) {
             return 1;
         }
@@ -44,8 +48,8 @@ public class Q70_ClimbingStairs {
         int i_2 = 1;
         int i_1 = 1;
 
-        int i_0 = 2;
-        for (int i = 2; i <= n; i++) {
+        int i_0 = i_2 + i_1;
+        for (int i = 2; i < n + 1; i++) {
             i_0 = i_2 + i_1;
 
             // update i_2/i_1 for next loop

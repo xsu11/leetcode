@@ -2,7 +2,7 @@ package com.xinsu;
 
 import com.xinsu.util.TreeNode;
 
-/*
+/**
  * Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
  *
  * According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as
@@ -32,8 +32,8 @@ import com.xinsu.util.TreeNode;
  * Constraints:
  *
  * The number of nodes in the tree is in the range [2, 105].
- * -109 <= Node.val <= 109
- * All Node.val are unique.
+ * -109 <= Vertex.val <= 109
+ * All Vertex.val are unique.
  * p != q
  * p and q will exist in the tree.
  */

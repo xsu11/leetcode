@@ -26,7 +26,7 @@ import com.xinsu.util.ListNode;
  *
  * The number of nodes in the list is sz.
  * 1 <= sz <= 30
- * 0 <= Node.val <= 100
+ * 0 <= Vertex.val <= 100
  * 1 <= n <= sz
  *
  *

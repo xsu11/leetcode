@@ -37,7 +37,7 @@ public class Q55_JumpGame {
                     farthest = reach;
                 }
 
-                // after update farthest, check whether it beyonds nums.length
+                // after updating farthest, check whether it beyonds nums.length
                 if (nums.length - 1 <= farthest) {
                     return true;
                 }

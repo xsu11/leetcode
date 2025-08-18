@@ -61,6 +61,7 @@ public class Q380_InsertDeleteGetRandom_O1 {
             return false;
         }
 
+        // add to the end of nums, index is nums.size() (before insertion)
         this.locations.put(val, this.nums.size());
         this.nums.add(val);
         return true;

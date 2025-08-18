@@ -30,7 +30,7 @@ import java.util.List;
  * Constraints:
  *
  * The number of nodes in the tree is in the range [0, 2000].
- * -100 <= Node.val <= 100
+ * -100 <= Vertex.val <= 100
  */
 
 public class Q103_BinaryTreeZigzagLevelOrderTraversal {

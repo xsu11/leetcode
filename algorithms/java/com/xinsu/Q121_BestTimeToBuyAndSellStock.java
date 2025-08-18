@@ -32,11 +32,11 @@ package com.xinsu;
 public class Q121_BestTimeToBuyAndSellStock {
 
     public int maxProfit(int[] prices) {
-        int maxP = 0;
+        int maxProfit = 0;
 
         // boundary case
         if (prices.length < 2) {
-            return maxP;
+            return maxProfit;
         }
 
         int globalMinPrice = prices[0];
@@ -45,11 +45,11 @@ public class Q121_BestTimeToBuyAndSellStock {
             // globalMinPrice always represents a day before day i, that is a buy
 
             // if sell on day i, what profit can get
-            int currentProfit = prices[i] - globalMinPrice;
+            int profit = prices[i] - globalMinPrice;
 
             // update max profit if possible
-            if (currentProfit > maxP) {
-                maxP = currentProfit;
+            if (maxProfit < profit) {
+                maxProfit = profit;
             }
 
             // update globalMinPrice if day i's price is lower
@@ -58,7 +58,36 @@ public class Q121_BestTimeToBuyAndSellStock {
             }
         }
 
-        return maxP;
+        return maxProfit;
+    }
+
+    public int maxProfit2(int[] prices) {
+        // boundary case
+        if (prices.length == 0) {
+            return 0;
+        }
+
+        int maxProfit = 0;
+
+        int minPrice = Integer.MAX_VALUE;
+        for (int i = 0; i < prices.length; i++) {
+            // update min price if needed
+            if (prices[i] < minPrice) {
+                minPrice = prices[i];
+            }
+
+            // now minPrice is the min price of prices[0:i], may be prices[i]
+
+            if (minPrice < prices[i]) {
+                // can get profit, update maxProfit if needed
+                int profit = prices[i] - minPrice;
+                if (maxProfit < profit) {
+                    maxProfit = profit;
+                }
+            }
+        }
+
+        return maxProfit;
     }
 
 }

@@ -34,11 +34,11 @@ public class Q28_FindTheIndexOfTheFirstOccurrenceInaString_Simplified1 {
             return 0;
         }
 
-        final char[] ss = haystack.toCharArray();
-        final char[] pp = needle.toCharArray();
+        final char[] s = haystack.toCharArray();
+        final char[] p = needle.toCharArray();
 
-        final int[] solved = solve(pp);
-        return check(ss, pp, solved);
+        final int[] pi = solve(p);
+        return check(s, p, pi);
     }
 
     /**
@@ -60,100 +60,92 @@ public class Q28_FindTheIndexOfTheFirstOccurrenceInaString_Simplified1 {
      *
      * pi(i) = [0,1,0,1,2,2,3,4,5,0]
      */
-    private int[] solve(char[] pp) {
-        final int[] solved = new int[pp.length];
+    private int[] solve(char[] p) {
+        final int[] pi = new int[p.length];
         // pi(0)=0，因为 a 没有真前缀和真后缀，根据规定为 0（可以发现对于任意字符串 pi(0)=0 必定成立）
-        solved[0] = 0;
+        pi[0] = 0;
 
         // boundary case
-        if (pp.length == 1) {
-            return solved;
+        if (p.length == 1) {
+            return pi;
         }
 
-        // pp.length > 1
+        // p.length > 1
 
         int lastMatchCount = 0;
-        for (int i = 1; i < pp.length; i++) {
-            lastMatchCount = solved[i - 1];
+        for (int i = 1; i < p.length; i++) {
+            lastMatchCount = pi[i - 1];
 
             if (lastMatchCount == 0) {
-                if (pp[0] == pp[i]) {
-                    solved[i] = 1;
-                } else {
-                    solved[i] = 0;
-                }
+                pi[i] = p[0] == p[i] ? 1 : 0;
             } else { // lastMatchCount > 0
                 // since this while loop will change lastMatchCount, need to check lastMatchCount > 0 to enter the loop
-                while (lastMatchCount > 0 && pp[lastMatchCount] != pp[i]) {
+                while (lastMatchCount > 0 && p[lastMatchCount] != p[i]) {
                     /*
                      * s: a a b a a a b a a b
                      * pi(8)=5，因为 aabaaabaa 最长的一对相等的真前后缀为 aab，长度为 5。
-                     * solved = [0,1,0,1,2,2,3,4,5]
+                     * pi = [0,1,0,1,2,2,3,4,5]
                      * 下一次循环i=9
                      * aabaaabaa b
-                     * lastMatch = solved[i-1] = solved[8] = 5
+                     * lastMatch = pi[i-1] = pi[8] = 5
                      * aabaaabaa 中 前缀 aabaa 与后缀 aabaa 相同
-                     * 测试 pp[5](a) != pp[9](b)
-                     * 则接下来需要判断前缀aabaa的前缀 与后缀 aabaa中 的后缀最多有多少相同，也就是solved[4] = solved[lastMatch-1]
+                     * 测试 p[5](a) != p[9](b)
+                     * 则接下来需要判断前缀aabaa的前缀 与后缀 aabaa中 的后缀最多有多少相同，也就是solved[4] = pi[lastMatch-1]
                      */
-                    lastMatchCount = solved[lastMatchCount - 1];
+                    lastMatchCount = pi[lastMatchCount - 1];
                 }
 
-                // set solved[i]
+                // set pi[i]
                 if (lastMatchCount == 0) {
-                    if (pp[0] == pp[i]) {
-                        solved[i] = 1;
-                    } else {
-                        solved[i] = 0;
-                    }
-                } else if (lastMatchCount > 0 && pp[lastMatchCount] == pp[i]) {
-                    solved[i] = lastMatchCount + 1;
-                } // else solved[i] maintains the original value 0
+                    pi[i] = p[0] == p[i] ? 1 : 0;
+                } else if (lastMatchCount > 0 && p[lastMatchCount] == p[i]) {
+                    pi[i] = lastMatchCount + 1;
+                } // else pi[i] maintains the original value 0
             }
         }
 
-        return solved;
+        return pi;
     }
 
-    private int check(char[] ss, char[] pp, int[] solved) {
+    private int check(char[] s, char[] p, int[] pi) {
         int matchCount = 0;
-        // check match count for ss[0:ss.length -1] with pp
-        for (int i = 0; i < ss.length; i++) {
+        // check match count for s[0:s.length -1] with p
+        for (int i = 0; i < s.length; i++) {
             // initially matchCount is 0
             // after last loop, matchCount is 0(no match) or >0(partial match), checkout both cases
             if (matchCount == 0) {
-                // no match found from last loop, start to check ss[i] with the first char of pp, that is pp[0]
-                if (pp[0] == ss[i]) {
+                // no match found from last loop, start to check s[i] with the first char of p, that is p[0]
+                if (p[0] == s[i]) {
                     matchCount++;
                 }
             } else { // matchCount > 0
                 /*
-                 * partial match from last loop, need to check ss[i] with the next char of the match part
+                 * partial match from last loop, need to check s[i] with the next char of the match part
                  *
                  * the index of the last char of the match part is matchCount - 1, so the index of the next char of the
                  * match part is matchCount
                  *
                  * since this while loop will change matchCount, need to check matchCount > 0 to enter the loop
                  */
-                while (matchCount > 0 && pp[matchCount] != ss[i]) {
-                    matchCount = solved[matchCount - 1];
+                while (matchCount > 0 && p[matchCount] != s[i]) {
+                    matchCount = pi[matchCount - 1];
                 }
 
-                // matchCount == 0 || (matchCount > 0 && pp[matchCount] == ss[i])
-                // now matchCount is the match count of how many chars matching of suffix of ss[0:i-1] with pp's prefix
-                // that is, ss[i-matchCount:i-1] matches pp[0:matchCount-1]
-                // so need to check ss[i] with next char of the match part of pp, that is pp[matchCount]
+                // matchCount == 0 || (matchCount > 0 && p[matchCount] == s[i])
+                // now matchCount is the match count of how many chars matching of suffix of s[0:i-1] with p's prefix
+                // that is, s[i-matchCount:i-1] matches p[0:matchCount-1]
+                // so need to check s[i] with next char of the match part of p, that is p[matchCount]
                 if (matchCount == 0) {
-                    if (pp[0] == ss[i]) {
+                    if (p[0] == s[i]) {
                         matchCount++;
                     }
-                } else { // matchCount > 0 && pp[matchCount] == ss[i]
+                } else { // matchCount > 0 && p[matchCount] == s[i]
                     matchCount++;
                 }
             }
 
             // after update of matchCount, need to check whether we have found a match by checking matchCount
-            if (matchCount == pp.length) {
+            if (matchCount == p.length) {
                 /*
                  * the first occurrence is found, now i is the last char of the match string,
                  * need to return the first char's index
@@ -162,7 +154,7 @@ public class Q28_FindTheIndexOfTheFirstOccurrenceInaString_Simplified1 {
                  * p: abc
                  * when matching, i is index of char c in s, i = 6, p.length = 3, the first char's index is 4
                  */
-                return i - pp.length + 1;
+                return i - p.length + 1;
             }
         }
 

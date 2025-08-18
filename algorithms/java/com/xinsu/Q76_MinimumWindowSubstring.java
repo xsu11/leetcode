@@ -35,6 +35,7 @@ import java.util.Map;
 public class Q76_MinimumWindowSubstring {
 
     public String minWindow(String s, String t) {
+        // char from t -> count
         final Map<Character, Integer> solved = solve(t);
         return check(s, solved);
     }
@@ -53,12 +54,12 @@ public class Q76_MinimumWindowSubstring {
         int minRight = -1;
         int minLength = Integer.MAX_VALUE;
 
-        // use two pointers
         final Map<Character, Integer> checked = new HashMap<>();
 
+        // use two pointers
         // first move right to next char that appears in solved
         int right = moveToNextRight(s, 0, solved, checked);
-        int left = right; // left stars from the same pos as right
+        int left = right; // left starts from the same pos as right
 
         // invariant:
         // 1. left and right point to char that appears in solved
@@ -90,6 +91,18 @@ public class Q76_MinimumWindowSubstring {
         return minLeft != -1 ? s.substring(minLeft, minRight + 1) : "";
     }
 
+    private boolean cover(Map<Character, Integer> checked, Map<Character, Integer> solved) {
+        for (final Map.Entry<Character, Integer> entry : solved.entrySet()) {
+            final char c = entry.getKey();
+            final int count = entry.getValue();
+            if (checked.getOrDefault(c, 0) < count) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     private static int moveToNextRight(
             String s,
             int begin,
@@ -102,13 +115,10 @@ public class Q76_MinimumWindowSubstring {
 
         // current points to next char that appears in solved
         if (current < s.length()) {
+            // need to add c to checked
             addRightChar(s.charAt(current), checked);
         }
         return current;
-    }
-
-    private static void addRightChar(char rightC, Map<Character, Integer> checked) {
-        checked.put(rightC, checked.getOrDefault(rightC, 0) + 1);
     }
 
     private static int moveToNextLeft(
@@ -125,23 +135,16 @@ public class Q76_MinimumWindowSubstring {
             current++;
         }
 
+        // no need to add to checked as s[begin:end] has already been added
         return current;
     }
 
-    private static void removeLeftChar(char leftC, Map<Character, Integer> checked) {
-        checked.put(leftC, checked.get(leftC) - 1);
+    private static void addRightChar(char c, Map<Character, Integer> checked) {
+        checked.put(c, checked.getOrDefault(c, 0) + 1);
     }
 
-    private boolean cover(Map<Character, Integer> checked, Map<Character, Integer> solved) {
-        for (final Map.Entry<Character, Integer> entry : solved.entrySet()) {
-            final Character c = entry.getKey();
-            final Integer count = entry.getValue();
-            if (checked.getOrDefault(c, 0) < count) {
-                return false;
-            }
-        }
-
-        return true;
+    private static void removeLeftChar(char c, Map<Character, Integer> checked) {
+        checked.put(c, checked.get(c) - 1);
     }
 
 }

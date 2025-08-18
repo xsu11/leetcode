@@ -42,7 +42,7 @@ public class Q152_MaximumProductSubarray {
             minF = Math.min(minF_1 * nums[i], Math.min(maxF_1 * nums[i], nums[i]));
 
             // since minF is long, it might be smaller than the minimum value of a 32-bit signed int: -2147483648
-            if (minF < -1<<31) {
+            if (minF < Integer.MIN_VALUE) {
                 minF = nums[i]; // discard previous product and reset minF to only contains nums[i]
             }
 

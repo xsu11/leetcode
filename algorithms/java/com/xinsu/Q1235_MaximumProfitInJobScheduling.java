@@ -60,7 +60,7 @@ public class Q1235_MaximumProfitInJobScheduling {
          * endTime <= the i-th job's startTime
          *
          * f(i) = max(f(i-1), f(k) + jobs[i].profit), i > 0
-         * f(0) = 0, i = 0
+         * f(0) = 0, i = 0, no jobs need to be scheduled, profit is 0
          *
          * f is an 1-based index array that represents f(i), while "jobs" in the following code is 0-based index array
          */

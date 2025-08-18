@@ -61,8 +61,14 @@ public class Q151_ReverseWordsInAString {
         // 2. right points to the last non-empty char of the string
         final StringBuilder sb = new StringBuilder();
         while (left < right + 1) {
-            if (s.charAt(left) != ' ' || s.charAt(left - 1) != ' ') {
-                sb.append(s.charAt(left));
+            if (left == 0) {
+                if (s.charAt(left) != ' ') {
+                    sb.append(s.charAt(left));
+                }
+            } else {
+                if (s.charAt(left) != ' ' || s.charAt(left - 1) != ' ') {
+                    sb.append(s.charAt(left));
+                }
             }
 
             left++;
@@ -83,7 +89,7 @@ public class Q151_ReverseWordsInAString {
     }
 
     private void reverseWord(StringBuilder sb) {
-        // use two pointers
+        // use two pointers, initially pointing to the first non-empty char of the first word
         int left = 0;
         int right = 0;
 
@@ -98,7 +104,7 @@ public class Q151_ReverseWordsInAString {
 
             // update left to the first char of next word
             left = right + 1;
-            right++;
+            right = left;
         }
     }
 

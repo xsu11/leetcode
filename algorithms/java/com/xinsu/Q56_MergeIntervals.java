@@ -45,15 +45,19 @@ public class Q56_MergeIntervals {
             final int left = interval[0];
             final int right = interval[1];
 
+            // merged.get(merged.size() - 1)[0] <= left
+
             if (merged.isEmpty() || merged.get(merged.size() - 1)[1] < left) {
                 // left beyonds the rightmost of merged, add this interval into merged's end
+                // ------merge.left---merge.right------left---right
                 merged.add(new int[] { left, right });
             } else {
-                // left is within the existing range mf merged
+                // left is within the existing range mf merged,
                 final int[] maxInterval = merged.get(merged.size() - 1);
                 if (maxInterval[1] < right) {
+                    // ------merge.left---left---merge.right---right
                     maxInterval[1] = right;
-                }
+                } // else: ------merge.left---left---right---merge.right, no need to add this interval
             }
         }
 

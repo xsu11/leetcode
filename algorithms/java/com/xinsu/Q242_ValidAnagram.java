@@ -45,6 +45,7 @@ public class Q242_ValidAnagram {
     }
 
     private Map<Character, Integer> solve(final String s) {
+        // char -> count in s
         final Map<Character, Integer> solved = new HashMap<>();
         for (final char c : s.toCharArray()) {
             solved.put(c, solved.getOrDefault(c, 0) + 1);

@@ -45,9 +45,11 @@ public class Q84_LargestRectangleInHistogram {
         for (int i = 0; i < heights.length; i++) {
             // check stack.size() > 1 instead of !stack.isEmpty() because stack has a dummy at bottom
             while (stack.size() > 1 && heights[i] <= heights[stack.peek()]) {
-                // found the closest e that is smaller than top, use it as right bound
+                // found the closest e that is smaller than top, use it as right bound (exclusive)
                 final int prevIndex = stack.pop();
-                final int area = (i - 1 - stack.peek()) * heights[prevIndex];
+                final int leftBoundIndex = stack.peek(); // left bound is the e under prevIndex in stack
+                final int rightBoundIndex = i - 1;
+                final int area = (rightBoundIndex - leftBoundIndex) * heights[prevIndex];
                 if (maxArea < area) {
                     maxArea = area;
                 }
@@ -60,7 +62,11 @@ public class Q84_LargestRectangleInHistogram {
         // pop them to calculate are using maximum index of heights as right bound
         while (stack.size() > 1) {
             final int i = stack.pop();
-            final int area = (heights.length - 1 - stack.peek()) * heights[i];
+            // left bound is the e under i in stack, might be dummy -1, that is the left pos of the heights left edge
+            final int leftBoundIndex = stack.peek();
+            // right bound is the heights right edge as all es on the right side are larger
+            final int rightBoundIndex = heights.length - 1;
+            final int area = (rightBoundIndex - leftBoundIndex) * heights[i];
             if (maxArea < area) {
                 maxArea = area;
             }

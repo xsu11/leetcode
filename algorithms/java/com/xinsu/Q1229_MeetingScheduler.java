@@ -39,11 +39,12 @@ import java.util.List;
 public class Q1229_MeetingScheduler {
 
     public List<Integer> minAvailableDuration(int[][] slots1, int[][] slots2, int duration) {
+        // sort by startTime
         Arrays.sort(slots1, Comparator.comparingInt(a -> a[0]));
         Arrays.sort(slots2, Comparator.comparingInt(a -> a[0]));
 
-        int p1 = 0;
-        int p2 = 0;
+        int p1 = 0; // traverse person 1
+        int p2 = 0; // traverse person 2
 
         while (p1 < slots1.length && p2 < slots2.length) {
             // find the common duration of two slots
@@ -51,12 +52,12 @@ public class Q1229_MeetingScheduler {
             final int commonEnd = Math.min(slots1[p1][1], slots2[p2][1]);
 
             if (duration <= commonEnd - commonStart) {
-                // a valid duration is found, return
+                // first valid duration is found, return
                 return Arrays.asList(commonStart, commonStart + duration);
             } else {
                 /*
                  * intersect does not cover the duration
-                 * move forward to pointer of the slot that ends earlier as the other one that ends later might have
+                 * move forward the pointer of the slot that ends earlier as the other one that ends later might have
                  * intersection with next slot, if these two slots ends at the same time, move both forward to next slot
                  */
                 if (slots1[p1][1] < slots2[p2][1]) {

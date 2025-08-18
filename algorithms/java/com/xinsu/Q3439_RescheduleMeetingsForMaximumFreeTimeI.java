@@ -90,7 +90,7 @@ public class Q3439_RescheduleMeetingsForMaximumFreeTimeI {
     private int findMaxFreeTime(int k, int[] gaps) {
         int maxFreeTime = 0;
 
-        // use two pointers to find maximum sequential k+1 gaps
+        // use two pointers as slide window to find maximum sequential k+1 gaps
         int freeTime = 0;
         int right = 0;
 

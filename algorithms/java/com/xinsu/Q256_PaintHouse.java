@@ -1,6 +1,6 @@
 package com.xinsu;
 
-/*
+/**
  * There is a row of n houses, where each house can be painted one of three colors: red, blue, or green. The cost of
  * painting each house with a certain color is different. You have to paint all the houses such that no two adjacent
  * houses have the same color.

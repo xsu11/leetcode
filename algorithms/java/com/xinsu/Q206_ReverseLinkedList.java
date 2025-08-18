@@ -26,7 +26,7 @@ import com.xinsu.util.ListNode;
  * Constraints:
  *
  * The number of nodes in the list is the range [0, 5000].
- * -5000 <= Node.val <= 5000
+ * -5000 <= Vertex.val <= 5000
  */
 
 public class Q206_ReverseLinkedList {

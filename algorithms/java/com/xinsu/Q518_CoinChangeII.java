@@ -47,12 +47,15 @@ public class Q518_CoinChangeII {
             return 0;
         }
 
+        // dp[i] is the count of the combination of using coins to make amount i
+        // dp[0] = 1: no coins are chosen to make amount 0
         final int[] dp = new int[amount + 1];
         dp[0] = 1;
         for (final int coin : coins) {
             for (int i = coin; i < amount + 1; i++) {
                 dp[i] += dp[i - coin];
             }
+            // dp[i] now is the final count
         }
 
         return dp[amount];
