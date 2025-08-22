@@ -31,7 +31,7 @@ public class Q215_KthLargestElementInAnArray {
 
     public int findKthLargest(int[] nums, int k) {
         // boundary case
-        if (k == 0) {
+        if (k <= 0) {
             // log
             return 0;
         }
