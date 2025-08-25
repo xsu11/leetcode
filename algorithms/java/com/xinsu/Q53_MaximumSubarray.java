@@ -36,11 +36,12 @@ public class Q53_MaximumSubarray {
      * for the i-th e in nums:
      * 1. if f(i-1) >= 0 && nums[i] >= 0, adding nums[i] increases the sum (f(i-1) + nums[i]) and length (i),
      * 2. if f(i-1) >= 0 && nums[i] < 0, although adding nums[i] decreases the sum, but it still might belong to the longest sequence with the max sum.
+     *
      * 3. if f(i-1) < 0 && nums[i] >= 0, adding f(i-1) contributes nothing to the sum, therefore nums[i] can be a beginning of a new sequence.
      * 4. if f(i-1) < 0 && nums[i] < 0, nums[i] can be a beginning of a new sequence.
      *
      * f(i) = f(i-1) + nums[i], f(i-1) >= 0
-     * f(i) = nums[i], otherwise
+     * f(i) = nums[i], f(i-1) < 0
      *
      * if nums[i] is too large, this needs to return a long, or even a string to represent large integer
      */
