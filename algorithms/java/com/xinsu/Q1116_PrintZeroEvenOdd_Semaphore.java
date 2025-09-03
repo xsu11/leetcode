@@ -37,7 +37,6 @@ import java.util.function.IntConsumer;
  *
  * 1 <= n <= 1000
  */
-
 public class Q1116_PrintZeroEvenOdd_Semaphore {
 
     private final int n;
@@ -52,34 +51,33 @@ public class Q1116_PrintZeroEvenOdd_Semaphore {
 
     // printNumber.accept(x) outputs "x", where x is an integer.
     public void zero(IntConsumer printNumber) throws InterruptedException {
-        for (int i = 1; i < n + 1; i++) {
-            zeroS.acquire();
-            printNumber.accept(0);
+        for (int i = 1; i < this.n + 1; i++) {
+            this.zeroS.acquire();
             printNumber.accept(0);
 
             if (i % 2 == 0) {
-                evenS.release();
+                this.evenS.release();
             } else {
-                oddS.release();
+                this.oddS.release();
             }
         }
     }
 
     public void even(IntConsumer printNumber) throws InterruptedException {
-        for (int i = 2; i < n + 1; i += 2) {
-            evenS.acquire();
+        for (int i = 2; i < this.n + 1; i += 2) {
+            this.evenS.acquire();
             printNumber.accept(i);
 
-            zeroS.release();
+            this.zeroS.release();
         }
     }
 
     public void odd(IntConsumer printNumber) throws InterruptedException {
-        for (int i = 1; i < n + 1; i += 2) {
-            oddS.acquire();
+        for (int i = 1; i < this.n + 1; i += 2) {
+            this.oddS.acquire();
             printNumber.accept(i);
 
-            zeroS.release();
+            this.zeroS.release();
         }
     }
 

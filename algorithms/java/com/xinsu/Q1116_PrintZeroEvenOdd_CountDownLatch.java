@@ -37,7 +37,6 @@ import java.util.function.IntConsumer;
  *
  * 1 <= n <= 1000
  */
-
 public class Q1116_PrintZeroEvenOdd_CountDownLatch {
 
     private final int n;

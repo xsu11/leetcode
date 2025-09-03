@@ -1,5 +1,7 @@
 package com.xinsu;
 
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.IntConsumer;
 
 /**
@@ -36,11 +38,13 @@ import java.util.function.IntConsumer;
  *
  * 1 <= n <= 1000
  */
-public class Q1116_PrintZeroEvenOdd_Synchronized {
+public class Q1116_PrintZeroEvenOdd_ReentrantLock_I {
 
     public static class ZeroEvenOdd {
 
         private final int n;
+        private final ReentrantLock lock = new ReentrantLock();
+        private final Condition[] condition = new Condition[3];
         /**
          * 0->print 0
          * 1->print 1
@@ -51,50 +55,68 @@ public class Q1116_PrintZeroEvenOdd_Synchronized {
 
         public ZeroEvenOdd(int n) {
             this.n = n;
+            for (int i = 0; i < this.condition.length; i++) {
+                this.condition[i] = this.lock.newCondition();
+            }
         }
 
         // printNumber.accept(x) outputs "x", where x is an integer.
         public void zero(IntConsumer printNumber) throws InterruptedException {
             for (int i = 1; i < this.n + 1; i++) {
-                synchronized (this) {
+                this.lock.lock();
+                try {
                     printNumber.accept(0);
 
                     this.flag = ++this.flag % 4; // 0->1 / 2->3
-                    notifyAll();
 
-                    while (this.flag % 2 != 0) {
-                        wait();
+                    // then print even/odd based on i
+                    if (this.flag == 1) {
+                        // print odd
+                        this.condition[1].signal();
+                    } else if (this.flag == 3) {
+                        // print even
+                        this.condition[2].signal();
                     }
+
+                    this.condition[0].await();
+                } finally {
+                    this.lock.unlock();
                 }
             }
         }
 
         public void even(IntConsumer printNumber) throws InterruptedException {
             for (int i = 2; i < this.n + 1; i += 2) {
-                synchronized (this) {
-                    while (this.flag != 3) {
-                        wait();
+                this.lock.lock();
+                try {
+                    if (this.flag != 3) {
+                        this.condition[2].await();
                     }
-
+                    // got signal for printing even
                     printNumber.accept(i);
 
-                    this.flag = ++this.flag % 4; // 3->0
-                    notifyAll();
+                    this.flag = ++this.flag % 4;
+                    this.condition[0].signal();
+                } finally {
+                    this.lock.unlock();
                 }
             }
         }
 
         public void odd(IntConsumer printNumber) throws InterruptedException {
             for (int i = 1; i < this.n + 1; i += 2) {
-                synchronized (this) {
-                    while (this.flag != 1) {
-                        wait();
+                this.lock.lock();
+                try {
+                    if (this.flag != 1) {
+                        this.condition[1].await();
                     }
-
+                    // got signal for printing odd
                     printNumber.accept(i);
 
-                    this.flag = ++this.flag % 4; // 1->2
-                    notifyAll();
+                    this.flag = ++this.flag % 4;
+                    this.condition[0].signal();
+                } finally {
+                    this.lock.unlock();
                 }
             }
         }
