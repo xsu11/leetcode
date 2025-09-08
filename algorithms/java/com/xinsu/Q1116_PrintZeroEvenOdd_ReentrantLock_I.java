@@ -40,6 +40,11 @@ import java.util.function.IntConsumer;
  */
 public class Q1116_PrintZeroEvenOdd_ReentrantLock_I {
 
+    /**
+     * ReentrantLock is used as lock
+     * three separate Conditions(await/signal) are used as barrier
+     */
+
     public static class ZeroEvenOdd {
 
         private final int n;

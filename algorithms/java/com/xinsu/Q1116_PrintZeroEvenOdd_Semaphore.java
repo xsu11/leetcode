@@ -39,6 +39,10 @@ import java.util.function.IntConsumer;
  */
 public class Q1116_PrintZeroEvenOdd_Semaphore {
 
+    /**
+     * three separate Semaphores(acquire/release) are used as lock + barrier
+     */
+
     private final int n;
 
     private final Semaphore zeroS = new Semaphore(1);

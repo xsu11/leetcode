@@ -4,8 +4,10 @@ import java.util.PriorityQueue;
 
 public class Q295_FindMedianFromDataStream {
 
-    private PriorityQueue<Integer> largeHeap = new PriorityQueue<>((a, b) -> a - b); // min heap by default
-    private PriorityQueue<Integer> smallHeap = new PriorityQueue<>((a, b) -> b - a); // max heap
+    // min heap by default
+    private final PriorityQueue<Integer> largeHeap = new PriorityQueue<>((a, b) -> a - b);
+    // max heap
+    private final PriorityQueue<Integer> smallHeap = new PriorityQueue<>((a, b) -> b - a);
 
     public Q295_FindMedianFromDataStream() {
     }
@@ -15,19 +17,19 @@ public class Q295_FindMedianFromDataStream {
         if (largeHeap.isEmpty()) { // smallHeap must be empty as well
             largeHeap.offer(num);
         } else {
-            // either largeHeap.size() == smallHeap.size(),
-            // or largeHeap.size() == smallHeap.size() + 1
+            // 1. either largeHeap.size() == smallHeap.size(),
+            // 2. or largeHeap.size() == smallHeap.size() + 1
             if (largeHeap.peek() < num) {
                 largeHeap.offer(num);
             } else {
                 smallHeap.offer(num);
             }
 
-            // largeHeap.size() == smallHeap.size():
+            // 1. largeHeap.size() == smallHeap.size():
             // either largeHeap.size() + 1 == smallHeap.size(), need balance
             // or largeHeap.size() == smallHeap.size() + 1,
 
-            // largeHeap.size() == smallHeap.size() + 1:
+            // 2. largeHeap.size() == smallHeap.size() + 1:
             // either largeHeap.size() == smallHeap.size(),
             // or largeHeap.size() == smallHeap.size() + 2, need balance
             tryBalance();

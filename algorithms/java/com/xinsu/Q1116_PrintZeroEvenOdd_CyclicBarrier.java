@@ -40,10 +40,19 @@ import java.util.function.IntConsumer;
  */
 public class Q1116_PrintZeroEvenOdd_CyclicBarrier {
 
+    /**
+     * three separate CyclicBarrier(await() for two to arrive) are used as lock + barrier
+     */
+
     private final int n;
 
+    // zero barrier: wait on zero and even/odd to arrive at barrier
     private final CyclicBarrier zeroC = new CyclicBarrier(2);
+
+    // even barrier: wait on even and zero to arrive at barrier
     private final CyclicBarrier evenC = new CyclicBarrier(2);
+
+    // odd barrier: wait on odd and zero to arrive at barrier
     private final CyclicBarrier oddC = new CyclicBarrier(2);
 
     public Q1116_PrintZeroEvenOdd_CyclicBarrier(int n) {
@@ -52,41 +61,43 @@ public class Q1116_PrintZeroEvenOdd_CyclicBarrier {
 
     // printNumber.accept(x) outputs "x", where x is an integer.
     public void zero(IntConsumer printNumber) throws InterruptedException {
-        for (int i = 1; i < n + 1; i++) {
+        for (int i = 1; i < this.n + 1; i++) {
             printNumber.accept(0);
 
             if (i % 2 == 0) {
-                waitC(evenC); // release evenC
+                waitC(this.evenC); // zero arrived at even barrier to trigger printing even
             } else {
-                waitC(oddC); // release oddC
+                waitC(this.oddC); // zero arrived at odd barrier to trigger printing odd
             }
 
-            waitC(zeroC); // wait for evenC/oddC to complete
+            waitC(this.zeroC); // zero arrived at zero barrier, waiting for even/odd to arrive
+            // both zero and even/odd have arrived, proceed to next loop
         }
     }
 
     public void even(IntConsumer printNumber) throws InterruptedException {
-        for (int i = 2; i < n + 1; i += 2) {
-            waitC(evenC); // wait for zeroC to release evenC
+        for (int i = 2; i < this.n + 1; i += 2) {
+            waitC(this.evenC); // even arrived at even barrier, wait for zero to arrive
+            // both even and zero have arrived, proceed to print even
             printNumber.accept(i);
-            waitC(zeroC); // release zeroC wait
+            waitC(this.zeroC); // even arrived at zero barrier to trigger printing zero
         }
     }
 
     public void odd(IntConsumer printNumber) throws InterruptedException {
-        for (int i = 1; i < n + 1; i += 2) {
-            waitC(oddC); // wait for zeroC to release oddC
+        for (int i = 1; i < this.n + 1; i += 2) {
+            waitC(this.oddC); // odd arrived at odd barrier, wait for zero to arrive
+            // both odd and zero have arrived, proceed to print odd
             printNumber.accept(i);
-            waitC(zeroC); // release zeroC wait
-
+            waitC(this.zeroC); // odd arrived at zero barrier to trigger printing zero
         }
     }
 
-    private void waitC(CyclicBarrier c) {
+    private void waitC(CyclicBarrier c) throws InterruptedException {
         try {
             c.await();
         } catch (InterruptedException | BrokenBarrierException e) {
-            throw new RuntimeException(e);
+            throw new InterruptedException(e.getMessage());
         }
     }
 

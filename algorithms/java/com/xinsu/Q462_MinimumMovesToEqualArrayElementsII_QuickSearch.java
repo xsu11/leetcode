@@ -66,14 +66,14 @@ public class Q462_MinimumMovesToEqualArrayElementsII_QuickSearch {
 
         // recursion
         return q < k
-                ? quickSearch(nums, q + 1, end, k)
-                : quickSearch(nums, begin, q - 1, k);
+                ? quickSearch(nums, q + 1, end, k) // k locates at right of q
+                : quickSearch(nums, begin, q - 1, k); // k locates at left of q
     }
 
     private int randomPartition(int[] nums, int begin, int end) {
-        final int r = this.random.nextInt(end - begin + 1);
-        final int pivot = nums[begin + r];
-        swap(nums, begin, begin + r); // move pivot to the beginning
+        final int randomIndex = begin + this.random.nextInt(end - begin + 1);
+        swap(nums, begin, randomIndex); // move pivot to the beginning
+        final int pivot = nums[begin];
 
         int p = begin; // p is the boundary that all elements left of p <= pivot
         for (int i = begin + 1; i <= end; i++) {
@@ -82,7 +82,8 @@ public class Q462_MinimumMovesToEqualArrayElementsII_QuickSearch {
                 swap(nums, p, i);
             }
         }
-        swap(nums, begin, p);
+        swap(nums, begin, p); // move pivot to its final position
+        // eventually, all elements: left <= nums[p](pivot) < right
         return p;
     }
 

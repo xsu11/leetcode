@@ -39,6 +39,11 @@ import java.util.function.IntConsumer;
  */
 public class Q1116_PrintZeroEvenOdd_CountDownLatch {
 
+    /**
+     * three separate CountDownLatchs (await/countDown) are used as lock + barrier
+     * opposite of Semaphore
+     */
+
     private final int n;
 
     private CountDownLatch zeroC = new CountDownLatch(0);

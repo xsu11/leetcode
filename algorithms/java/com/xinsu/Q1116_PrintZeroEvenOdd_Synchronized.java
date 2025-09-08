@@ -38,6 +38,11 @@ import java.util.function.IntConsumer;
  */
 public class Q1116_PrintZeroEvenOdd_Synchronized {
 
+    /**
+     * synchronized is used as lock
+     * volatile flag + wait/notifyAll is used as barrier
+     */
+
     public static class ZeroEvenOdd {
 
         private final int n;
