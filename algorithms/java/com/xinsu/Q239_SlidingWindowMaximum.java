@@ -4,7 +4,8 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 /**
- * 给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+ * 给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。
+ * 滑动窗口每次只向右移动一位。
  *
  * 返回 滑动窗口中的最大值 。
  *
@@ -43,7 +44,7 @@ public class Q239_SlidingWindowMaximum {
             return new int[0];
         }
 
-        // Doube queue storing index of nums
+        // Double queue storing index of nums
         // maintaining a desc order from head to tail
         // head's index may < left bound of k window
         final Deque<Integer> deque = new LinkedList<>();

@@ -36,6 +36,7 @@ public class Q215_KthLargestElementInAnArray {
             return 0;
         }
 
+        // min heap by default
         final PriorityQueue<Integer> minHeap = new PriorityQueue<>((a, b) -> a - b);
         for (final int n : nums) {
             if (minHeap.size() < k) {

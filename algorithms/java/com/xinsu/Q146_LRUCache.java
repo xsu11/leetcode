@@ -101,7 +101,7 @@ public class Q146_LRUCache {
     }
 
     private void removeLRUNode() {
-        // cache is full, need to remove LRU node
+        // cache is full, need to remove LRU node, that is the last node
         final Node lruNode = this.dummy.prev;
         removeNode(lruNode);
         this.cache.remove(lruNode.key);

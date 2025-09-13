@@ -53,7 +53,6 @@ public class Q208_ImplementTrie_PrefixTree {
                 final int i = c - 'a';
                 if (cur.getChild(i) == null) {
                     cur.setChild(i);
-
                 }
 
                 // cur move to next level
